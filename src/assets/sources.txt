@@ -1,0 +1,24 @@
+Most files in this directory are based on other work. This list shows all source files and (if required) there license and additional details.
+
+file name				license					URL/notes
+---------------------------------------------------------------------------------------------------------
+finish.bmp				Public Domain (CC0)		https://openclipart.org/detail/138847/buddhist-light
+candycane.bmp			not specified			http://www.bilderdatenbank.biz/details.php?image_id=114
+pear.bmp				not specified			http://www.bilderdatenbank.biz/details.php?image_id=160
+P_stone.bmp				not specified			http://www.bilderdatenbank.biz/details.php?image_id=148
+apple.bmp				<unknown>				<unknown>
+wall.bmp										<Own work>
+hiddenwall.bmp									<Own work>
+empty.bmp										<Own work>
+person_left.bmp									<Own work>
+person_right.bmp								<Own work>
+person_up.bmp									<Own work>
+person_down.bmp									<Own work>
+special\del.bmp									<Own work>
+special\delPreview.bmp							<Own work>
+special\move.bmp								<Own work>
+special\movePreview.bmp							<Own work>
+background\default.bmp							<Own work>
+background\wood.bmp								<Own work>
+move.bmp										<Empty dummy file>
+P_del.bmp										<Empty dummy file>

@@ -6,7 +6,7 @@ describe('HomePage', () => {
   let fixture: ComponentFixture<HomePage>;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomePage ],
+      declarations: [HomePage],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
     fixture = TestBed.createComponent(HomePage);
