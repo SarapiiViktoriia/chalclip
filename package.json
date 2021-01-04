@@ -3,11 +3,15 @@
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
+  "engines": {
+    "node": "10.x"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
+    "test": "npm run test --single-run",
+    "testKeep": "npm run test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
