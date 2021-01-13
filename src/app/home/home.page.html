@@ -5,16 +5,57 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <ion-grid fixed>
-    <ion-row *ngFor="let row of items">
-      <ion-col *ngFor="let column of row">
-        <div class="gameCell" *ngFor="let block of column">
-          <ion-thumbnail *ngIf="block != null">
-            <ion-img [src]="block?.imageSource"></ion-img>
-          </ion-thumbnail>
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-content>
+<ion-split-pane>
+  <ion-content class="game">
+    <ion-grid fixed>
+      <ion-row *ngFor="let row of items">
+        <ion-col *ngFor="let column of row">
+          <div class="gameCell" *ngFor="let block of column">
+            <ion-thumbnail *ngIf="block != null">
+              <ion-img [src]="block?.imageSource"></ion-img>
+            </ion-thumbnail>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+  <ion-content class="status">
+    <ion-list lines="none" class="status-list">
+      <ion-item>
+        <ion-chip item-content>
+          <ion-avatar>
+            <img src="assets/icon/accu-batteries-energy.svg">
+          </ion-avatar>
+          <ion-label>{{battery}}</ion-label>
+        </ion-chip>
+      </ion-item>
+      <ion-item>
+        <ion-chip>
+          <ion-avatar>
+            <img src="assets/icon/energy-hot-sun.svg">
+          </ion-avatar>
+          <ion-label>{{energy}}</ion-label>
+        </ion-chip>
+      </ion-item>
+      <ion-item>
+        <ion-chip>
+          <ion-avatar>
+            <img src="assets/icon/access-time.svg">
+          </ion-avatar>
+          <ion-label>{{time}}</ion-label>
+        </ion-chip>
+      </ion-item>
+    </ion-list>
+    <ion-grid fixed>
+      <ion-row *ngFor="let inventoryrow of inventory.getInventoryItems(4)">
+        <ion-col *ngFor="let inventoryblock of inventoryrow">
+          <div class="inventoryCell">
+            <ion-thumbnail *ngIf="inventoryblock != null">
+              <ion-img [src]="inventoryblock?.imageSource"></ion-img>
+            </ion-thumbnail>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
+</ion-split-pane>
