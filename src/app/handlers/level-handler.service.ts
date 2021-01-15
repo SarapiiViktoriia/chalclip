@@ -1,4 +1,4 @@
-import { Inventory } from './inventory';
+import { InventoryHandler } from './inventory-handler';
 import { EmptyBlock } from './../modells/gameBlocks/empty-block';
 import { MoveDirection } from './../modells/move-direction';
 import { GameBlock } from './../modells/gameBlocks/game-block';
@@ -14,7 +14,7 @@ import { StackLayer } from '../modells/stackLayer';
 export class LevelHandlerService {
   private stack: GameBlock[][][] = new Array<Array<Array<GameBlock>>>(0);
   public player: Player;
-  protected inventory: Inventory = new Inventory(this);
+  protected inventory: InventoryHandler = new InventoryHandler(this);
   constructor() {
     this.loadLevel();
   }
@@ -163,7 +163,7 @@ export class LevelHandlerService {
   public getInventoryItems(): Array<Array<GameBlock>> {
     return this.inventory.getInventoryItems(4);
   }
-  public getInventory(): Inventory {
+  public getInventory(): InventoryHandler {
     return this.inventory;
   }
 }

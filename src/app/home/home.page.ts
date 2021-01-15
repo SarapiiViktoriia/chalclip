@@ -1,4 +1,4 @@
-import { Inventory } from './../handlers/inventory';
+import { InventoryHandler } from '../handlers/inventory-handler';
 import { MoveDirection } from './../modells/move-direction';
 import { Player } from '../modells/gameBlocks/player';
 import { GameBlock } from '../modells/gameBlocks/game-block';
@@ -13,7 +13,7 @@ import { HostListener } from '@angular/core';
 export class HomePage {
   levelHandlerService: LevelHandlerService;
   items: Array<Array<Array<GameBlock>>>;
-  inventory: Inventory;
+  inventory: InventoryHandler;
   time: string = "not implemented"; 
   energy: number = 0;
   battery: number = 0;

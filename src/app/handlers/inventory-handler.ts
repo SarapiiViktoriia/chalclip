@@ -1,7 +1,7 @@
 import { LevelHandlerService } from 'src/app/handlers/level-handler.service';
-import { EmptyBlock } from './../modells/gameBlocks/empty-block';
+import { EmptyBlock } from '../modells/gameBlocks/empty-block';
 import { GameBlock } from '../modells/gameBlocks/game-block';
-export class Inventory {
+export class InventoryHandler {
   private inventory: Array<GameBlock> = new Array<GameBlock>(0);
   private inventrySize: number = 8;
   constructor(levelHandler: LevelHandlerService) {
