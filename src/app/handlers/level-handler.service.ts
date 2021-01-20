@@ -1,4 +1,3 @@
-import { InventoryHandler } from './inventory-handler';
 import { EmptyBlock } from './../modells/gameBlocks/empty-block';
 import { MoveDirection } from './../modells/move-direction';
 import { GameBlock } from './../modells/gameBlocks/game-block';
@@ -8,17 +7,18 @@ import { SolidBlock } from '../modells/gameBlocks/solid-block';
 import { Player } from '../modells/gameBlocks/player';
 import { Injectable } from '@angular/core';
 import { StackLayer } from '../modells/stackLayer';
+import { isUndefined } from 'util';
 @Injectable({
   providedIn: 'root'
 })
 export class LevelHandlerService {
-  private stack: GameBlock[][][] = new Array<Array<Array<GameBlock>>>(0);
+  private stack: GameBlock[][][];
   public player: Player;
-  protected inventory: InventoryHandler = new InventoryHandler(this);
   constructor() {
     this.loadLevel();
   }
   public loadLevel() {
+    this.stack = new Array<Array<Array<GameBlock>>>(0);
     for (let y = 0; y < 9; y++) {
       this.stack[y] = new Array<Array<GameBlock>>(0);
       for (let x = 0; x < 9; x++) {
@@ -159,11 +159,5 @@ export class LevelHandlerService {
         break;
     }
     return this.getNewPosition(position, newDirection);
-  }
-  public getInventoryItems(): Array<Array<GameBlock>> {
-    return this.inventory.getInventoryItems(4);
-  }
-  public getInventory(): InventoryHandler {
-    return this.inventory;
   }
 }
