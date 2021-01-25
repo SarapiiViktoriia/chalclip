@@ -1,7 +1,5 @@
 {
   "name": "Clippys Challenge",
-  "integrations": {
-    "cordova": {}
-  },
+  "integrations": {},
   "type": "angular"
 }
