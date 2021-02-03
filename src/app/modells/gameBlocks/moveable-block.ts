@@ -4,16 +4,16 @@ import { LevelHandlerService } from 'src/app/handlers/level-handler.service';
 export class MoveableBlock extends GameBlock {
   constructor(levelHandler: LevelHandlerService) {
     super(levelHandler);
-    this.$imageSource = "assets/P_stone.bmp";
+    this.$imageSource = 'assets/P_stone.bmp';
   }
   public canMoveToHere(blockToMove: GameBlock, direction: MoveDirection) {
-    let currentPosition = this.levelHandler.getBlockPosition(this);
-    let currentPositionStack = this.levelHandler.getZStack(currentPosition[0], currentPosition[1]);
-    let newPosition = this.levelHandler.getNewPosition(currentPosition, direction);
+    const currentPosition = this.levelHandler.getBlockPosition(this);
+    const currentPositionStack = this.levelHandler.getZStack(currentPosition[0], currentPosition[1]);
+    const newPosition = this.levelHandler.getNewPosition(currentPosition, direction);
     if (newPosition.includes(-1) || currentPosition === newPosition) {
       return false;
     }
-    let newPositionStack = this.levelHandler.getZStack(newPosition[1], newPosition[0]);
+    const newPositionStack = this.levelHandler.getZStack(newPosition[1], newPosition[0]);
     if (!this.levelHandler.executeCanMoveFromHere(this, direction, currentPositionStack)) {
       return false;
     }
