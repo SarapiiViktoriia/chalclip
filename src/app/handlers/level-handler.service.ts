@@ -38,7 +38,7 @@ export class LevelHandlerService {
   public getStack(): GameBlock[][][] {
     return this.stack;
   }
-  public getZStack(xCoord: number, yCoord: number): Array<GameBlock> {
+  public getZStack(yCoord: number, xCoord: number): Array<GameBlock> {
     return this.stack[yCoord][xCoord];
   }
   public getBlockPosition(block: GameBlock): number[] {
@@ -57,12 +57,12 @@ export class LevelHandlerService {
   }
   public moveBlock(block: GameBlock, direction: MoveDirection): boolean {
     const currentPosition = this.getBlockPosition(block);
-    const currentPositionStack = this.getZStack(currentPosition[1], currentPosition[0]);
+    const currentPositionStack = this.getZStack(currentPosition[0], currentPosition[1]);
     const newPosition = this.getNewPosition(currentPosition, direction);
     if (newPosition.includes(-1) || currentPosition === newPosition) {
       return false;
     }
-    const newPositionStack = this.getZStack(newPosition[1], newPosition[0]);
+    const newPositionStack = this.getZStack(newPosition[0], newPosition[1]);
     if (!newPositionStack) {
       return false;
     }

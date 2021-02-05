@@ -1,4 +1,3 @@
-import { Countdown } from './../helper/timer';
 import { InventoryHandler } from '../handlers/inventory-handler';
 import { MoveDirection } from './../modells/move-direction';
 import { Player } from '../modells/gameBlocks/player';
@@ -13,20 +12,31 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  levelHandlerService: LevelHandlerService;
-  modalController: ModalController;
-  items: Array<Array<Array<GameBlock>>>;
-  inventory: InventoryHandler;
-  time: Countdown = new Countdown();
-  battery = 0;
-  energy = 0;
+  private levelHandlerService: LevelHandlerService;
+  public modalController: ModalController;
+  public items: Array<Array<Array<GameBlock>>>;
+  public inventory: InventoryHandler;
+  public battery = 0;
+  public energy = 0;
+  public timeLeft: number = 5;
+  private interval;
   constructor(levelHandlerService: LevelHandlerService, modalController: ModalController) {
     this.levelHandlerService = levelHandlerService;
     this.items = this.levelHandlerService.getStack();
     this.inventory = this.levelHandlerService.getInventory();
     this.modalController = modalController;
-    this.time.on('expired', () => this.presentModal());
-    this.time.start(10);
+    this.startTimer();
+  }
+  private startTimer() {
+    this.interval = setInterval(() => {
+      if (this.timeLeft >= 2) {
+        this.timeLeft--;
+      } else {
+        this.timeLeft = 0;
+        clearInterval(this.interval);
+        this.presentModal();
+      }
+    }, 1000);
   }
   async presentModal() {
   }

@@ -13,7 +13,7 @@ export class MoveableBlock extends GameBlock {
     if (newPosition.includes(-1) || currentPosition === newPosition) {
       return false;
     }
-    const newPositionStack = this.levelHandler.getZStack(newPosition[1], newPosition[0]);
+    const newPositionStack = this.levelHandler.getZStack(newPosition[0], newPosition[1]);
     if (!this.levelHandler.executeCanMoveFromHere(this, direction, currentPositionStack)) {
       return false;
     }
