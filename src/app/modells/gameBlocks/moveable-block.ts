@@ -9,6 +9,11 @@ export class MoveableBlock extends GameBlock {
   public canMoveToHere(blockToMove: GameBlock, direction: MoveDirection) {
     const currentPosition = this.levelHandler.getBlockPosition(this);
     const currentPositionStack = this.levelHandler.getZStack(currentPosition[0], currentPosition[1]);
+    const lastPosition = this.levelHandler.getLastPosition(currentPosition, direction);
+    const lastPositionStack = this.levelHandler.getZStack(lastPosition[0], lastPosition[1]);
+    if (!lastPositionStack.includes(this.levelHandler.player)) {
+      return false;
+    }
     const newPosition = this.levelHandler.getNewPosition(currentPosition, direction);
     if (newPosition.includes(-1) || currentPosition === newPosition) {
       return false;
