@@ -6,6 +6,7 @@ export class EmptyBlock extends GameBlock {
     super(levelHandler);
     this.$imageSource = 'assets/empty.bmp';
   }
+  public name = 'Placeholder';
   public canMoveToHere(blockToMove: GameBlock, direction: MoveDirection) {
     return true;
   }
