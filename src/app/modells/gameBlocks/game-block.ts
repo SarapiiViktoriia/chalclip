@@ -3,7 +3,7 @@ import { MoveDirection } from './../move-direction';
 import { LevelHandlerService } from './../../handlers/level-handler.service';
 export abstract class GameBlock {
   private imageSource: string;
-  public levelHandler: LevelHandlerService;
+  protected levelHandler: LevelHandlerService;
   constructor(levelHandler: LevelHandlerService) {
     this.levelHandler = levelHandler;
     this.imageSource = 'assets/default.bmp';
