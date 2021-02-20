@@ -24,7 +24,5 @@ export abstract class GameBlock {
   public set $imageSource(value: string) {
     this.imageSource = value;
   }
-  public getStackZCoord(): StackLayer {
-    return null;
-  }
+  public abstract getStackZCoord(): StackLayer;
 }
