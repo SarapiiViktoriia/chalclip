@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>options</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item>
+    <ion-input type="text" placeholder="LevelName" (input)="fileName = $event.target.value"></ion-input>
+    <ion-button (click)="downloadLevel()">
+      Download this level
+    </ion-button>
+    <div id="json"></div>
+  </ion-item>
+  <ion-button (click)="uploadLevel()">
+    Add a level to Editor
+  </ion-button>
+</ion-content>

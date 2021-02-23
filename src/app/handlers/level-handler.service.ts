@@ -186,4 +186,13 @@ export class LevelHandlerService {
     const zPosition = newBlockInstance.getStackZCoord();
     this.stack[position[0]][position[1]][zPosition] = newBlockInstance;
   }
+  public serializeLevel(): string {
+    return JSON.stringify(this.stack, this.replacer);
+  }
+  public replacer(key: string, value: any) {
+    if (key === 'levelHandler') {
+      return undefined;
+    }
+    return value;
+  }
 }

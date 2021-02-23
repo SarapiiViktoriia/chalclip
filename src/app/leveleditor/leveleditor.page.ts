@@ -1,3 +1,5 @@
+import { OptionsPage } from './options/options.page';
+import { ModalController } from '@ionic/angular';
 import { WoodBackground } from './../modells/gameBlocks/Background/wood-background';
 import { SolidBlock } from './../modells/gameBlocks/solid-block';
 import { Player } from './../modells/gameBlocks/player';
@@ -13,11 +15,13 @@ import { GameBlock } from '../modells/gameBlocks/game-block';
 })
 export class LeveleditorPage {
   private levelHandler: LevelHandlerService;
+  private modalController: ModalController;
   public items: Array<Array<Array<GameBlock>>>;
   public selectedItem: GameBlock;
   public chipsChallenge1Items: Array<GameBlock> = new Array(0);
-  constructor(levelHandlerService: LevelHandlerService) {
+  constructor(levelHandlerService: LevelHandlerService, modalController: ModalController) {
     this.levelHandler = levelHandlerService;
+    this.modalController = modalController;
     this.items = this.levelHandler.getStack();
     this.chipsChallenge1Items.push(
       new Player(levelHandlerService),
@@ -49,5 +53,17 @@ export class LeveleditorPage {
     }
     const position = this.levelHandler.getBlockPosition(blockItem);
     this.levelHandler.createNewBlockAtPosition(this.selectedItem, position);
+  }
+  public optionsClicked() {
+    this.presentModal();
+  }
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: OptionsPage,
+      componentProps: {
+        levelHandler: this.levelHandler
+      }
+    });
+    return await modal.present();
   }
 }

@@ -18,7 +18,7 @@ export class HomePage {
   public inventory: InventoryHandler;
   public battery = 0;
   public energy = 0;
-  public timeLeft: number = 5;
+  public timeLeft = 5;
   private interval;
   constructor(levelHandlerService: LevelHandlerService, modalController: ModalController) {
     this.levelHandlerService = levelHandlerService;
