@@ -1,5 +1,7 @@
 import { LevelHandlerService } from 'src/app/handlers/level-handler.service';
 import { Component } from '@angular/core';
+import { FileChooser } from '@ionic-native/file-chooser/ngx';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-options',
   templateUrl: './options.page.html',
@@ -8,7 +10,8 @@ import { Component } from '@angular/core';
 export class OptionsPage {
   public levelHandler: LevelHandlerService;
   public fileName: string;
-  constructor() {
+  public levelFile: File;
+  constructor(private fileChooser: FileChooser) {
   }
   public uploadLevel() {
   }

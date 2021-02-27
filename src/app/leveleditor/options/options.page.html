@@ -11,7 +11,10 @@
     </ion-button>
     <div id="json"></div>
   </ion-item>
-  <ion-button (click)="uploadLevel()">
-    Add a level to Editor
-  </ion-button>
+  <ion-item>
+    <ion-input type="file" placeholder="LevelFile" (input)="levelFile = $event.target.value"></ion-input>
+    <ion-button (click)="uploadLevel()">
+      Add a level to Editor
+    </ion-button>
+  </ion-item>
 </ion-content>
