@@ -15,6 +15,7 @@ export class LevelHandlerService {
   private stack: GameBlock[][][] = new Array<Array<Array<GameBlock>>>(0);
   public player: Player;
   protected inventory: InventoryHandler = new InventoryHandler(this);
+  public levelName: string;
   constructor() {
     this.loadLevel();
   }
@@ -187,10 +188,15 @@ export class LevelHandlerService {
     this.stack[position[0]][position[1]][zPosition] = newBlockInstance;
   }
   public serializeLevel(): string {
-    return JSON.stringify(this.stack, this.replacer);
+    return JSON.stringify(this, this.replacer);
   }
   public replacer(key: string, value: any) {
-    if (key === 'levelHandler') {
+    const ignoredProperties = [
+      'levelHandler',
+      'player',
+      'inventory'
+    ];
+    if (ignoredProperties.includes(key)) {
       return undefined;
     }
     return value;

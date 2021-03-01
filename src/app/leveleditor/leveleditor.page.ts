@@ -14,20 +14,17 @@ import { GameBlock } from '../modells/gameBlocks/game-block';
   styleUrls: ['./leveleditor.page.scss'],
 })
 export class LeveleditorPage {
-  private levelHandler: LevelHandlerService;
-  private modalController: ModalController;
   public items: Array<Array<Array<GameBlock>>>;
   public selectedItem: GameBlock;
   public chipsChallenge1Items: Array<GameBlock> = new Array(0);
-  constructor(levelHandlerService: LevelHandlerService, modalController: ModalController) {
-    this.levelHandler = levelHandlerService;
+  constructor(private levelHandler: LevelHandlerService, private modalController: ModalController) {
     this.modalController = modalController;
     this.items = this.levelHandler.getStack();
     this.chipsChallenge1Items.push(
-      new Player(levelHandlerService),
-      new MoveableBlock(levelHandlerService),
-      new SolidBlock(levelHandlerService),
-      new WoodBackground(levelHandlerService)
+      new Player(levelHandler),
+      new MoveableBlock(levelHandler),
+      new SolidBlock(levelHandler),
+      new WoodBackground(levelHandler)
     );
   }
   @HostListener('document:keydown', ['$event'])
