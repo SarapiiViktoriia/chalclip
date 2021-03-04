@@ -2,7 +2,6 @@ import { LevelService } from './../../handlers/level.service';
 import { NavController, NavParams } from '@ionic/angular';
 import { LevelHandlerService } from 'src/app/handlers/level-handler.service';
 import { Component } from '@angular/core';
-import { FileChooser } from '@ionic-native/file-chooser/ngx';
 @Component({
   selector: 'app-options',
   templateUrl: './options.page.html',
@@ -19,7 +18,6 @@ export class OptionsPage {
     public navParams: NavParams
   ) { }
   public uploadLevel() {
-    this.saveLevel();
   }
   public downloadLevel() {
     this.levelHandler.levelName = this.levelName;
