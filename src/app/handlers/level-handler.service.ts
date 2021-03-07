@@ -1,25 +1,24 @@
-import { Player } from './../modells/gameBlocks/player';
-import { InventoryHandler } from './inventory-handler';
 import { EmptyBlock } from './../modells/gameBlocks/empty-block';
 import { MoveDirection } from './../modells/move-direction';
 import { GameBlock } from './../modells/gameBlocks/game-block';
 import { WoodBackground } from '../modells/gameBlocks/Background/wood-background';
 import { MoveableBlock } from '../modells/gameBlocks/moveable-block';
 import { SolidBlock } from '../modells/gameBlocks/solid-block';
+import { Player } from '../modells/gameBlocks/player';
 import { Injectable } from '@angular/core';
 import { StackLayer } from '../modells/stackLayer';
+import { isUndefined } from 'util';
 @Injectable({
   providedIn: 'root'
 })
 export class LevelHandlerService {
-  private stack: GameBlock[][][] = new Array<Array<Array<GameBlock>>>(0);
+  private stack: GameBlock[][][];
   public player: Player;
-  protected inventory: InventoryHandler = new InventoryHandler(this);
-  public levelName: string;
   constructor() {
     this.loadLevel();
   }
   public loadLevel() {
+    this.stack = new Array<Array<Array<GameBlock>>>(0);
     for (let y = 0; y < 9; y++) {
       this.stack[y] = new Array<Array<GameBlock>>(0);
       for (let x = 0; x < 9; x++) {
@@ -39,31 +38,31 @@ export class LevelHandlerService {
   public getStack(): GameBlock[][][] {
     return this.stack;
   }
-  public getZStack(position: Array<number>): Array<GameBlock> {
-    return this.stack[position[0]][position[1]];
+  public getZStack(xCoord: number, yCoord: number): Array<GameBlock> {
+    return this.stack[yCoord][xCoord];
   }
   public getBlockPosition(block: GameBlock): number[] {
-    const location = new Array(3);
+    let location = [2];
     this.stack.forEach((element, yCoord) => {
       element.forEach((element2, xCoord) => {
-        const zCoord = element2.indexOf(block);
-        if (zCoord !== -1) {
+        let zCoord = element2.indexOf(block);
+        if (zCoord != -1) {
           location[0] = yCoord;
           location[1] = xCoord;
           location[2] = zCoord;
         }
-      });
+      })
     });
     return location;
   }
   public moveBlock(block: GameBlock, direction: MoveDirection): boolean {
-    const currentPosition = this.getBlockPosition(block);
-    const currentPositionStack = this.getZStack(currentPosition);
-    const newPosition = this.getNewPosition(currentPosition, direction);
+    let currentPosition = this.getBlockPosition(block);
+    let currentPositionStack = this.getZStack(currentPosition[1], currentPosition[0]);
+    let newPosition = this.getNewPosition(currentPosition, direction);
     if (newPosition.includes(-1) || currentPosition === newPosition) {
       return false;
     }
-    const newPositionStack = this.getZStack(newPosition);
+    let newPositionStack = this.getZStack(newPosition[1], newPosition[0]);
     if (!newPositionStack) {
       return false;
     }
@@ -83,10 +82,10 @@ export class LevelHandlerService {
     return true;
   }
   private executeMoveBlock(block: GameBlock, direction: MoveDirection) {
-    const currentPosition = this.getBlockPosition(block);
-    const newPosition = this.getNewPosition(currentPosition, direction);
+    let currentPosition = this.getBlockPosition(block);
+    let newPosition = this.getNewPosition(currentPosition, direction);
     this.stack[newPosition[0]][newPosition[1]][newPosition[2]] = block;
-    const newEmptyBlock = new EmptyBlock(this);
+    let newEmptyBlock = new EmptyBlock(this);
     this.stack[currentPosition[0]][currentPosition[1]][currentPosition[2]] = newEmptyBlock;
   }
   public executeCanMoveFromHere(blockToMove: GameBlock, direction: MoveDirection, currentPositionStack: Array<GameBlock>): boolean {
@@ -160,45 +159,5 @@ export class LevelHandlerService {
         break;
     }
     return this.getNewPosition(position, newDirection);
-  }
-  public getInventoryItems(): Array<Array<GameBlock>> {
-    return this.inventory.getInventoryItems(4);
-  }
-  public getInventory(): InventoryHandler {
-    return this.inventory;
-  }
-  public createNewBlockAtPosition(block: GameBlock, position: Array<number>) {
-    const newBlockInstance = Object.create(block);
-    newBlockInstance.getInstance(this);
-    if (block instanceof Player) {
-      const emptyBlock = new EmptyBlock(this);
-      this.stack[position[0]][position[1]][StackLayer.block] = emptyBlock;
-      const emptyBlock2 = new EmptyBlock(this);
-      if (this.player != null) {
-        const oldPlayerPosition = this.getBlockPosition(this.player);
-        this.stack[oldPlayerPosition[0]][oldPlayerPosition[1]][StackLayer.player] = emptyBlock2;
-      }
-      this.player = newBlockInstance;
-    } else if (block.getStackZCoord() === StackLayer.block && this.getBlockPosition(this.player).positionEqual(position)) {
-      const emptyBlock = new EmptyBlock(this);
-      this.stack[position[0]][position[1]][StackLayer.player] = emptyBlock;
-      this.player = null;
-    }
-    const zPosition = newBlockInstance.getStackZCoord();
-    this.stack[position[0]][position[1]][zPosition] = newBlockInstance;
-  }
-  public serializeLevel(): string {
-    return JSON.stringify(this, this.replacer);
-  }
-  public replacer(key: string, value: any) {
-    const ignoredProperties = [
-      'levelHandler',
-      'player',
-      'inventory'
-    ];
-    if (ignoredProperties.includes(key)) {
-      return undefined;
-    }
-    return value;
   }
 }
