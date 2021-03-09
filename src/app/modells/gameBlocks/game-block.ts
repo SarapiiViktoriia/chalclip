@@ -5,7 +5,7 @@ export abstract class GameBlock {
   public levelHandler: LevelHandlerService;
   constructor(levelHandler: LevelHandlerService) {
     this.levelHandler = levelHandler;
-    this.imageSource = "assets/default.bmp";
+    this.imageSource = 'assets/default.bmp';
   }
   public canMoveFromHere(blockToMove: GameBlock, direction: MoveDirection): boolean {
     return true;
