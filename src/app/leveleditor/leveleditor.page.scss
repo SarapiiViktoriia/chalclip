@@ -1,0 +1,33 @@
+ion-thumbnail{
+  border: 1px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, .8);;
+}
+ion-col{
+    padding: 0;
+    margin: 0;
+    flex: 0;
+    position: relative;
+}
+.game{
+  min-width: 80% !important;
+}
+.status{
+  max-width: 20% ;
+  .status-list{
+    margin-top: 60px;
+    ion-chip{
+      height: 50px;
+    }
+    ion-avatar{
+      width:50px;
+      height: auto;
+    }
+    ion-label{
+      font-size: 20px;
+    }
+  }
+}
+ion-img{
+  margin-right: 10px;
+}
