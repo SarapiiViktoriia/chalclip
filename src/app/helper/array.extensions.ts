@@ -2,7 +2,7 @@ Array.prototype.positionEqual = function positionEqual<T>(this: T[], array2: Arr
   if (this.length !== array2.length) {
     return false;
   }
-  for (let i = this.length; i--;) {
+  for (let i = this.length; i--) {
     if (i === 2) {
       continue;
     }
