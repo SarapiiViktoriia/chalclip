@@ -1,11 +1,11 @@
-import { WoodBackground } from './../modells/gameBlocks/Background/wood-background';
-import { SolidBlock } from './../modells/gameBlocks/solid-block';
-import { Player } from './../modells/gameBlocks/player';
-import { MoveableBlock } from './../modells/gameBlocks/moveable-block';
-import { MoveDirection } from './../modells/move-direction';
+import { WoodBackground } from './../models/gameBlocks/Background/wood-background';
+import { SolidBlock } from './../models/gameBlocks/solid-block';
+import { Player } from './../models/gameBlocks/player';
+import { MoveableBlock } from './../models/gameBlocks/moveable-block';
+import { MoveDirection } from './../models/move-direction';
 import { LevelHandlerService } from 'src/app/handlers/level-handler.service';
 import { Component, OnInit, HostListener } from '@angular/core';
-import { GameBlock } from '../modells/gameBlocks/game-block';
+import { GameBlock } from '../models/gameBlocks/game-block';
 @Component({
   selector: 'app-leveleditor',
   templateUrl: './leveleditor.page.html',

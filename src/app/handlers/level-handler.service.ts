@@ -1,20 +1,20 @@
-import { Player } from './../modells/gameBlocks/player';
-import { InventoryHandler } from './inventory-handler';
-import { EmptyBlock } from './../modells/gameBlocks/empty-block';
-import { MoveDirection } from './../modells/move-direction';
-import { GameBlock } from './../modells/gameBlocks/game-block';
-import { WoodBackground } from '../modells/gameBlocks/Background/wood-background';
-import { MoveableBlock } from '../modells/gameBlocks/moveable-block';
-import { SolidBlock } from '../modells/gameBlocks/solid-block';
+import { Player } from './../models/gameBlocks/player';
+import { InventoryHandlerService } from './inventory-handler.service';
+import { EmptyBlock } from './../models/gameBlocks/empty-block';
+import { MoveDirection } from './../models/move-direction';
+import { GameBlock } from './../models/gameBlocks/game-block';
+import { WoodBackground } from '../models/gameBlocks/Background/wood-background';
+import { MoveableBlock } from '../models/gameBlocks/moveable-block';
+import { SolidBlock } from '../models/gameBlocks/solid-block';
 import { Injectable } from '@angular/core';
-import { StackLayer } from '../modells/stackLayer';
+import { StackLayer } from '../models/stackLayer';
 @Injectable({
   providedIn: 'root'
 })
 export class LevelHandlerService {
   private stack: GameBlock[][][] = new Array<Array<Array<GameBlock>>>(0);
   public player: Player;
-  protected inventory: InventoryHandler = new InventoryHandler(this);
+  protected inventory: InventoryHandlerService = new InventoryHandlerService(this);
   constructor() {
     this.loadLevel();
   }
@@ -163,7 +163,7 @@ export class LevelHandlerService {
   public getInventoryItems(): Array<Array<GameBlock>> {
     return this.inventory.getInventoryItems(4);
   }
-  public getInventory(): InventoryHandler {
+  public getInventory(): InventoryHandlerService {
     return this.inventory;
   }
   public createNewBlockAtPosition(block: GameBlock, position: Array<number>) {
