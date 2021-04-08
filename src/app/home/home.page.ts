@@ -1,7 +1,7 @@
-import { InventoryHandlerService } from '../handlers/inventory-handler.service';
-import { MoveDirection } from './../models/move-direction';
-import { Player } from '../models/gameBlocks/player';
-import { GameBlock } from '../models/gameBlocks/game-block';
+import { InventoryHandler } from '../handlers/inventory-handler';
+import { MoveDirection } from './../modells/move-direction';
+import { Player } from '../modells/gameBlocks/player';
+import { GameBlock } from '../modells/gameBlocks/game-block';
 import { LevelHandlerService } from '../handlers/level-handler.service';
 import { Component } from '@angular/core';
 import { HostListener } from '@angular/core';
@@ -15,7 +15,7 @@ export class HomePage {
   private levelHandlerService: LevelHandlerService;
   public modalController: ModalController;
   public items: Array<Array<Array<GameBlock>>>;
-  public inventory: InventoryHandlerService;
+  public inventory: InventoryHandler;
   public battery = 0;
   public energy = 0;
   public timeLeft: number = 5;

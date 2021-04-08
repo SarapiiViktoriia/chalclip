@@ -1,11 +1,7 @@
-import { Injectable } from '@angular/core';
 import { LevelHandlerService } from 'src/app/handlers/level-handler.service';
-import { EmptyBlock } from '../models/gameBlocks/empty-block';
-import { GameBlock } from '../models/gameBlocks/game-block';
-@Injectable({
-  providedIn: 'root'
-})
-export class InventoryHandlerService {
+import { EmptyBlock } from '../modells/gameBlocks/empty-block';
+import { GameBlock } from '../modells/gameBlocks/game-block';
+export class InventoryHandler {
   private inventory: Array<GameBlock> = new Array<GameBlock>(0);
   private inventrySize = 8;
   constructor(levelHandler: LevelHandlerService) {

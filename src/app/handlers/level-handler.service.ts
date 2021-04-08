@@ -1,20 +1,20 @@
-import { Player } from './../models/gameBlocks/player';
-import { InventoryHandlerService } from './inventory-handler.service';
-import { EmptyBlock } from './../models/gameBlocks/empty-block';
-import { MoveDirection } from './../models/move-direction';
-import { GameBlock } from './../models/gameBlocks/game-block';
-import { WoodBackground } from '../models/gameBlocks/Background/wood-background';
-import { MoveableBlock } from '../models/gameBlocks/moveable-block';
-import { SolidBlock } from '../models/gameBlocks/solid-block';
+import { InventoryHandler } from './inventory-handler';
+import { EmptyBlock } from './../modells/gameBlocks/empty-block';
+import { MoveDirection } from './../modells/move-direction';
+import { GameBlock } from './../modells/gameBlocks/game-block';
+import { WoodBackground } from '../modells/gameBlocks/Background/wood-background';
+import { MoveableBlock } from '../modells/gameBlocks/moveable-block';
+import { SolidBlock } from '../modells/gameBlocks/solid-block';
+import { Player } from '../modells/gameBlocks/player';
 import { Injectable } from '@angular/core';
-import { StackLayer } from '../models/stackLayer';
+import { StackLayer } from '../modells/stackLayer';
 @Injectable({
   providedIn: 'root'
 })
 export class LevelHandlerService {
   private stack: GameBlock[][][] = new Array<Array<Array<GameBlock>>>(0);
   public player: Player;
-  protected inventory: InventoryHandlerService = new InventoryHandlerService(this);
+  protected inventory: InventoryHandler = new InventoryHandler(this);
   constructor() {
     this.loadLevel();
   }
@@ -163,27 +163,7 @@ export class LevelHandlerService {
   public getInventoryItems(): Array<Array<GameBlock>> {
     return this.inventory.getInventoryItems(4);
   }
-  public getInventory(): InventoryHandlerService {
+  public getInventory(): InventoryHandler {
     return this.inventory;
-  }
-  public createNewBlockAtPosition(block: GameBlock, position: Array<number>) {
-    const newBlockInstance = Object.create(block);
-    newBlockInstance.getInstance(this);
-    if (block instanceof Player) {
-      const emptyBlock = new EmptyBlock(this);
-      this.stack[position[0]][position[1]][StackLayer.block] = emptyBlock;
-      const emptyBlock2 = new EmptyBlock(this);
-      if (this.player != null) {
-        const oldPlayerPosition = this.getBlockPosition(this.player);
-        this.stack[oldPlayerPosition[0]][oldPlayerPosition[1]][StackLayer.player] = emptyBlock2;
-      }
-      this.player = newBlockInstance;
-    } else if (block.getStackZCoord() === StackLayer.block && this.getBlockPosition(this.player).positionEqual(position)) {
-      const emptyBlock = new EmptyBlock(this);
-      this.stack[position[0]][position[1]][StackLayer.player] = emptyBlock;
-      this.player = null;
-    }
-    const zPosition = newBlockInstance.getStackZCoord();
-    this.stack[position[0]][position[1]][zPosition] = newBlockInstance;
   }
 }
