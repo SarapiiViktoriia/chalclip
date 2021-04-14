@@ -24,7 +24,6 @@ export class InventoryHandlerService {
   }
   public add(block: GameBlock): boolean {
     for (let index = 0; index < this.inventory.length; index++) {
-      const element = this.inventory[index];
       this.inventory[index] = block;
       return true;
     }
