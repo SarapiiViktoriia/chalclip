@@ -8,9 +8,9 @@ import { GameBlock } from '../models/gameBlocks/game-block';
 export class InventoryHandlerService {
   private inventory: Array<GameBlock> = new Array<GameBlock>(0);
   private inventorySize = 8;
-  constructor(levelHandler: LevelHandlerService) {
+  constructor() {
     for (let inventoryItem = 0; inventoryItem < this.inventorySize; inventoryItem++) {
-      this.inventory.push(new EmptyBlock(levelHandler));
+      this.inventory.push(new EmptyBlock(null));
     }
   }
   public getInventoryItems(elementsPerArray: number): Array<Array<GameBlock>> {
