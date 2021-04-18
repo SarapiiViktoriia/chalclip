@@ -14,7 +14,7 @@ import { StackLayer } from '../models/stackLayer';
 export class LevelHandlerService {
   private stack: GameBlock[][][] = new Array<Array<Array<GameBlock>>>(0);
   public player: Player;
-  protected inventory: InventoryHandlerService = new InventoryHandlerService(this);
+  protected inventory: InventoryHandlerService = new InventoryHandlerService();
   constructor() {
     this.loadLevel();
   }
