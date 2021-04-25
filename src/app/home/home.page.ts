@@ -1,12 +1,11 @@
-import { InventoryHandlerService } from '../handlers/inventory-handler.service';
-import { MoveDirection } from './../models/move-direction';
-import { GameBlock } from '../models/gameBlocks/game-block';
+import { InventoryHandler } from '../handlers/inventory-handler';
+import { MoveDirection } from './../modells/move-direction';
+import { Player } from '../modells/gameBlocks/player';
+import { GameBlock } from '../modells/gameBlocks/game-block';
 import { LevelHandlerService } from '../handlers/level-handler.service';
 import { Component } from '@angular/core';
 import { HostListener } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { interval } from 'rxjs';
-import { take } from 'rxjs/operators';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -16,10 +15,11 @@ export class HomePage {
   private levelHandlerService: LevelHandlerService;
   public modalController: ModalController;
   public items: Array<Array<Array<GameBlock>>>;
-  public inventory: InventoryHandlerService;
+  public inventory: InventoryHandler;
   public battery = 0;
   public energy = 0;
   public timeLeft = 5;
+  private interval;
   constructor(levelHandlerService: LevelHandlerService, modalController: ModalController) {
     this.levelHandlerService = levelHandlerService;
     this.items = this.levelHandlerService.getStack();
@@ -28,14 +28,15 @@ export class HomePage {
     this.startTimer();
   }
   private startTimer() {
-    const counter = interval(1000);
-    const takeFourNumbers = counter.pipe(take(this.timeLeft));
-    takeFourNumbers.subscribe(x => {
-      this.timeLeft--;
-      if (this.timeLeft === 0) {
+    this.interval = setInterval(() => {
+      if (this.timeLeft >= 2) {
+        this.timeLeft--;
+      } else {
+        this.timeLeft = 0;
+        clearInterval(this.interval);
         this.presentModal();
       }
-    });
+    }, 1000);
   }
   async presentModal() {
   }

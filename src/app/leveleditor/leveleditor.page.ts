@@ -1,29 +1,30 @@
-import { WoodBackground } from './../models/gameBlocks/Background/wood-background';
-import { SolidBlock } from './../models/gameBlocks/solid-block';
-import { Player } from './../models/gameBlocks/player';
-import { MoveableBlock } from './../models/gameBlocks/moveable-block';
-import { MoveDirection } from './../models/move-direction';
+import { OptionsPage } from './options/options.page';
+import { ModalController } from '@ionic/angular';
+import { WoodBackground } from './../modells/gameBlocks/Background/wood-background';
+import { SolidBlock } from './../modells/gameBlocks/solid-block';
+import { Player } from './../modells/gameBlocks/player';
+import { MoveableBlock } from './../modells/gameBlocks/moveable-block';
+import { MoveDirection } from './../modells/move-direction';
 import { LevelHandlerService } from 'src/app/handlers/level-handler.service';
 import { Component, OnInit, HostListener } from '@angular/core';
-import { GameBlock } from '../models/gameBlocks/game-block';
+import { GameBlock } from '../modells/gameBlocks/game-block';
 @Component({
   selector: 'app-leveleditor',
   templateUrl: './leveleditor.page.html',
   styleUrls: ['./leveleditor.page.scss'],
 })
 export class LeveleditorPage {
-  private levelHandler: LevelHandlerService;
   public items: Array<Array<Array<GameBlock>>>;
   public selectedItem: GameBlock;
   public chipsChallenge1Items: Array<GameBlock> = new Array(0);
-  constructor(levelHandlerService: LevelHandlerService) {
-    this.levelHandler = levelHandlerService;
+  constructor(private levelHandler: LevelHandlerService, private modalController: ModalController) {
+    this.modalController = modalController;
     this.items = this.levelHandler.getStack();
     this.chipsChallenge1Items.push(
-      new Player(levelHandlerService),
-      new MoveableBlock(levelHandlerService),
-      new SolidBlock(levelHandlerService),
-      new WoodBackground(levelHandlerService)
+      new Player(levelHandler),
+      new MoveableBlock(levelHandler),
+      new SolidBlock(levelHandler),
+      new WoodBackground(levelHandler)
     );
   }
   @HostListener('document:keydown', ['$event'])
@@ -49,5 +50,17 @@ export class LeveleditorPage {
     }
     const position = this.levelHandler.getBlockPosition(blockItem);
     this.levelHandler.createNewBlockAtPosition(this.selectedItem, position);
+  }
+  public optionsClicked() {
+    this.presentModal();
+  }
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: OptionsPage,
+      componentProps: {
+        levelHandler: this.levelHandler
+      }
+    });
+    return await modal.present();
   }
 }
