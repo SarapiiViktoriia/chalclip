@@ -18,6 +18,9 @@ export class OptionsPage {
     public navParams: NavParams
   ) { }
   public uploadLevel() {
+    const reader = new FileReader();
+    reader.readAsText(this.levelFile, 'UTF-8');
+    const result = reader.result;
   }
   public downloadLevel() {
     this.levelHandler.levelName = this.levelName;
