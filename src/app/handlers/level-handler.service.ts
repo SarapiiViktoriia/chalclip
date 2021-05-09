@@ -166,4 +166,24 @@ export class LevelHandlerService {
   public getInventory(): InventoryHandlerService {
     return this.inventory;
   }
+  public createNewBlockAtPosition(block: GameBlock, position: Array<number>) {
+    const newBlockInstance = Object.create(block);
+    newBlockInstance.getInstance(this);
+    if (block instanceof Player) {
+      const emptyBlock = new EmptyBlock(this);
+      this.stack[position[0]][position[1]][StackLayer.block] = emptyBlock;
+      const emptyBlock2 = new EmptyBlock(this);
+      if (this.player != null) {
+        const oldPlayerPosition = this.getBlockPosition(this.player);
+        this.stack[oldPlayerPosition[0]][oldPlayerPosition[1]][StackLayer.player] = emptyBlock2;
+      }
+      this.player = newBlockInstance;
+    } else if (block.getStackZCoord() === StackLayer.block && this.getBlockPosition(this.player).positionEqual(position)) {
+      const emptyBlock = new EmptyBlock(this);
+      this.stack[position[0]][position[1]][StackLayer.player] = emptyBlock;
+      this.player = null;
+    }
+    const zPosition = newBlockInstance.getStackZCoord();
+    this.stack[position[0]][position[1]][zPosition] = newBlockInstance;
+  }
 }
