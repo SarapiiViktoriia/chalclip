@@ -1,24 +1,24 @@
-import { WoodBackground } from './../models/gameBlocks/Background/wood-background';
+import { WoodBackground } from '../models/gameBlocks/background/wood-background';
 import { SolidBlock } from './../models/gameBlocks/solid-block';
 import { Player } from './../models/gameBlocks/player';
 import { MoveableBlock } from './../models/gameBlocks/moveable-block';
 import { MoveDirection } from './../models/move-direction';
-import { LevelHandlerService } from 'src/app/handlers/level-handler.service';
+import { LevelHandlerService } from 'src/app/handlers/level.service';
 import { Component, OnInit, HostListener } from '@angular/core';
 import { GameBlock } from '../models/gameBlocks/game-block';
 @Component({
   selector: 'app-leveleditor',
   templateUrl: './leveleditor.page.html',
-  styleUrls: ['./leveleditor.page.scss'],
+  styleUrls: ['./leveleditor.page.scss']
 })
 export class LeveleditorPage {
   private levelHandler: LevelHandlerService;
-  public items: Array<Array<Array<GameBlock>>>;
+  public levelGrid: Array<Array<Array<GameBlock>>>;
   public selectedItem: GameBlock;
   public chipsChallenge1Items: Array<GameBlock> = new Array(0);
   constructor(levelHandlerService: LevelHandlerService) {
     this.levelHandler = levelHandlerService;
-    this.items = this.levelHandler.getStack();
+    this.levelGrid = this.levelHandler.getLevelGridTiles();
     this.chipsChallenge1Items.push(
       new Player(levelHandlerService),
       new MoveableBlock(levelHandlerService),
@@ -30,20 +30,20 @@ export class LeveleditorPage {
   keyListenerEvent(event: KeyboardEvent) {
     if (this.levelHandler.player != null) {
       if (event.key === 'ArrowUp' || event.key === 'w') {
-        this.levelHandler.moveBlock(this.levelHandler.player, MoveDirection.moveNorth);
+        this.levelHandler.moveBlock(this.levelHandler.player, MoveDirection.north);
       } else if (event.key === 'ArrowDown' || event.key === 's') {
-        this.levelHandler.moveBlock(this.levelHandler.player, MoveDirection.moveSouth);
+        this.levelHandler.moveBlock(this.levelHandler.player, MoveDirection.south);
       } else if (event.key === 'ArrowLeft' || event.key === 'a') {
-        this.levelHandler.moveBlock(this.levelHandler.player, MoveDirection.moveWest);
+        this.levelHandler.moveBlock(this.levelHandler.player, MoveDirection.west);
       } else if (event.key === 'ArrowRight' || event.key === 'd') {
-        this.levelHandler.moveBlock(this.levelHandler.player, MoveDirection.moveEast);
+        this.levelHandler.moveBlock(this.levelHandler.player, MoveDirection.east);
       }
     }
   }
   public itemClicked(item: GameBlock) {
     this.selectedItem = item;
   }
-  public levelClicked(blockItem: GameBlock) {
+  public tileClicked(blockItem: GameBlock) {
     if (!this.selectedItem) {
       return;
     }

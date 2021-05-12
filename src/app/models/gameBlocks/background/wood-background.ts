@@ -1,5 +1,5 @@
-import { MoveDirection } from './../../move-direction';
-import { LevelHandlerService } from '../../../handlers/level-handler.service';
+import { MoveDirection } from '../../move-direction';
+import { LevelHandlerService } from '../../../handlers/level.service';
 import { GameBlock } from '../game-block';
 import { StackLayer } from '../../stackLayer';
 export class WoodBackground extends GameBlock {

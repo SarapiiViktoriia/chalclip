@@ -1,6 +1,6 @@
 import { MoveDirection } from './../move-direction';
 import { GameBlock } from './game-block';
-import { LevelHandlerService } from 'src/app/handlers/level-handler.service';
+import { LevelHandlerService } from 'src/app/handlers/level.service';
 import { StackLayer } from '../stackLayer';
 export class MoveableBlock extends GameBlock {
   constructor(levelHandler: LevelHandlerService) {

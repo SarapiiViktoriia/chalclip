@@ -1,4 +1,4 @@
-import { LevelHandlerService } from './../../handlers/level-handler.service';
+import { LevelHandlerService } from '../../handlers/level.service';
 import { GameBlock } from './game-block';
 import { StackLayer } from '../stackLayer';
 export class SolidBlock extends GameBlock {

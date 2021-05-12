@@ -1,6 +1,6 @@
 import { StackLayer } from './../stackLayer';
 import { MoveDirection } from './../move-direction';
-import { LevelHandlerService } from './../../handlers/level-handler.service';
+import { LevelHandlerService } from '../../handlers/level.service';
 export abstract class GameBlock {
   private imageSource: string;
   protected levelHandler: LevelHandlerService;
@@ -8,7 +8,7 @@ export abstract class GameBlock {
     this.levelHandler = levelHandler;
     this.imageSource = 'assets/default.bmp';
   }
-  public abstract name: string;
+  public abstract readonly name: string;
   public canMoveFromHere(blockToMove: GameBlock, direction: MoveDirection): boolean {
     return true;
   }
