@@ -1,6 +1,6 @@
 export enum MoveDirection {
-  moveNorth = 0,
-  moveSouth = 1,
-  moveWest = 2,
-  moveEast = 3
+  north = 0,
+  south = 1,
+  west = 2,
+  east = 3
 }

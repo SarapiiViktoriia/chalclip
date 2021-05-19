@@ -1,11 +1,10 @@
-import { HttpClientModule } from '@angular/common/http';
-import { OptionsPage } from './options/options.page';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { LeveleditorPage } from './leveleditor.page';
+import { LevelGridComponent } from '../level/level-grid/level-grid.component';
 const routes: Routes = [
   {
     path: '',
@@ -17,13 +16,11 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
-    HttpClientModule
+    RouterModule.forChild(routes)
   ],
   declarations: [
     LeveleditorPage,
-    OptionsPage
-  ],
-  entryComponents: [OptionsPage]
+    LevelGridComponent
+  ]
 })
-export class LeveleditorPageModule { }
+export class LeveleditorPageModule {}

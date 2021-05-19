@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LevelHandlerService } from 'src/app/handlers/level-handler.service';
+import { LevelHandlerService } from 'src/app/handlers/level.service';
 import { EmptyBlock } from '../models/gameBlocks/empty-block';
 import { GameBlock } from '../models/gameBlocks/game-block';
 @Injectable({
