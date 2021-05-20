@@ -2,7 +2,7 @@
   <ion-grid fixed>
     <ion-row *ngFor="let row of levelGrid">
       <ion-col *ngFor="let column of row">
-        <div class="gameCell" *ngFor="let tile of column" (click)="tileClicked(tile)">
+        <div class="levelTile" *ngFor="let tile of column" (click)="tileClicked(tile)">
           <ion-thumbnail *ngIf="tile != null">
             <ion-img [src]="tile?.$imageSource"></ion-img>
           </ion-thumbnail>
