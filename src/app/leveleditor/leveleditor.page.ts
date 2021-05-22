@@ -12,12 +12,10 @@ import { GameBlock } from '../models/gameBlocks/game-block';
   styleUrls: ['./leveleditor.page.scss']
 })
 export class LeveleditorPage {
-  private levelHandler: LevelHandlerService;
   public levelGrid: Array<Array<Array<GameBlock>>>;
   public selectedItem: GameBlock;
   public chipsChallenge1Items: Array<GameBlock> = new Array(0);
-  constructor(levelHandlerService: LevelHandlerService) {
-    this.levelHandler = levelHandlerService;
+  constructor(private levelHandler: LevelHandlerService) {
     this.levelGrid = this.levelHandler.getLevelGridTiles();
     this.chipsChallenge1Items.push(
       new Player(levelHandlerService),
@@ -26,7 +24,7 @@ export class LeveleditorPage {
       new WoodBackground(levelHandlerService)
     );
   }
-  @HostListener('document:keydown', ['$event'])
+  @HostListener('document:keydown', ['$event']) 
   keyListenerEvent(event: KeyboardEvent) {
     if (this.levelHandler.player != null) {
       if (event.key === 'ArrowUp' || event.key === 'w') {
@@ -41,9 +39,11 @@ export class LeveleditorPage {
     }
   }
   public itemClicked(item: GameBlock) {
+    console.log('selected item:', item);
     this.selectedItem = item;
   }
   public tileClicked(blockItem: GameBlock) {
+    console.log('replace old block', blockItem, 'with', this.selectedItem);
     if (!this.selectedItem) {
       return;
     }

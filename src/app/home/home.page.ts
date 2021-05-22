@@ -29,8 +29,8 @@ export class HomePage implements OnDestroy {
     this.startTimer();
   }
   private startTimer() {
-    const counter = interval(1000);
-    const takeFourNumbers = counter.pipe(
+    const counter$ = interval(1000);
+    const takeFourNumbers = counter$.pipe(
       take(this.timeLeft),
       takeUntil(this.ngUnsubscribe)
     );
