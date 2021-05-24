@@ -1,13 +1,18 @@
 import { MoveDirection } from './../move-direction';
 import { GameBlock } from './game-block';
-import { LevelHandlerService } from 'src/app/handlers/level.service';
+import { LevelHandlerService } from 'src/app/handlers/level-handler.service';
 import { StackLayer } from '../stackLayer';
 export class MoveableBlock extends GameBlock {
   constructor(levelHandler: LevelHandlerService) {
     super(levelHandler);
     this.$imageSource = 'assets/P_stone.bmp';
   }
+  public static '@type' = 'Dirt';
+  public '@type' = 'Dirt';
   public name = 'Dirt';
+  public static getInstance(levelHandler: LevelHandlerService): MoveableBlock {
+    return new MoveableBlock(levelHandler);
+  }
   public canMoveToHere(blockToMove: GameBlock, direction: MoveDirection) {
     const currentPosition = this.levelHandler.getBlockPosition(this);
     const currentPositionStack = this.levelHandler.getZStack(currentPosition);
@@ -33,9 +38,6 @@ export class MoveableBlock extends GameBlock {
     if (blockToMove !== this) {
       this.levelHandler.moveBlock(this, direction);
     }
-  }
-  public getInstance(levelHandler: LevelHandlerService): MoveableBlock {
-    return new MoveableBlock(levelHandler);
   }
   public getStackZCoord(): StackLayer {
     return StackLayer.block;

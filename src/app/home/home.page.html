@@ -6,7 +6,19 @@
   </ion-toolbar>
 </ion-header>
 <ion-split-pane>
-  <app-level-grid [levelGrid]="levelGrid"></app-level-grid>
+  <ion-content class="game">
+    <ion-grid fixed>
+      <ion-row *ngFor="let row of items">
+        <ion-col *ngFor="let column of row">
+          <div class="gameCell" *ngFor="let block of column">
+            <ion-thumbnail *ngIf="block != null">
+              <ion-img [src]="block?.imageSource"></ion-img>
+            </ion-thumbnail>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
   <ion-content class="status">
     <ion-list lines="none" class="status-list">
       <ion-item>
