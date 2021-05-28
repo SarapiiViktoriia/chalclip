@@ -20,7 +20,6 @@ export class HomePage {
   public battery = 0;
   public energy = 0;
   public timeLeft = 5;
-  private interval;
   constructor(levelHandlerService: LevelHandlerService, modalController: ModalController) {
     this.levelHandlerService = levelHandlerService;
     this.items = this.levelHandlerService.getStack();
