@@ -1,4 +1,4 @@
-import { LevelHandlerService } from './../../handlers/level-handler.service';
+import { LevelHandlerService } from '../../handlers/level.service';
 import { GameBlock } from './game-block';
 import { MoveDirection } from '../move-direction';
 import { StackLayer } from '../stackLayer';
@@ -7,29 +7,27 @@ export class Player extends GameBlock {
     super(levelHandler);
     this.$imageSource = 'assets/person_down.bmp';
   }
-  public static '@type' = 'Player';
-  public '@type' = 'Player';
   public name = 'Clippy';
-  public static getInstance(levelHandler: LevelHandlerService): Player {
-    return new Player(levelHandler);
-  }
   public preCheckEvent(blockToMove: GameBlock, direction: MoveDirection, blockStack: Array<GameBlock>) {
     switch (direction) {
-      case MoveDirection.moveNorth:
+      case MoveDirection.north:
         this.$imageSource = 'assets/person_up.bmp';
         break;
-      case MoveDirection.moveSouth:
+      case MoveDirection.south:
         this.$imageSource = 'assets/person_down.bmp';
         break;
-      case MoveDirection.moveEast:
+      case MoveDirection.east:
         this.$imageSource = 'assets/person_right.bmp';
         break;
-      case MoveDirection.moveWest:
+      case MoveDirection.west:
         this.$imageSource = 'assets/person_left.bmp';
         break;
     }
   }
   public getStackZCoord(): StackLayer {
     return StackLayer.player;
+  }
+  public getInstance(levelHandler: LevelHandlerService): Player {
+    return new Player(levelHandler);
   }
 }

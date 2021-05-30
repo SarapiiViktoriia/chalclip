@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { LevelHandlerService } from 'src/app/handlers/level-handler.service';
 import { EmptyBlock } from '../models/gameBlocks/empty-block';
 import { GameBlock } from '../models/gameBlocks/game-block';
 @Injectable({
@@ -22,9 +21,9 @@ export class InventoryHandlerService {
     }
     return dimensionalInventory;
   }
-  public add(block: GameBlock): boolean {
+  public add(item: GameBlock): boolean {
     for (let index = 0; index < this.inventory.length; index++) {
-      this.inventory[index] = block;
+      this.inventory[index] = item;
       return true;
     }
     return false;
