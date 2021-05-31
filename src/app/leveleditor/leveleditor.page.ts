@@ -1,7 +1,3 @@
-import { WoodBackground } from '../models/gameBlocks/background/wood-background';
-import { SolidBlock } from './../models/gameBlocks/solid-block';
-import { Player } from './../models/gameBlocks/player';
-import { MoveableBlock } from './../models/gameBlocks/moveable-block';
 import { MoveDirection } from './../models/move-direction';
 import { LevelHandlerService } from 'src/app/handlers/level.service';
 import { Component, OnInit, HostListener } from '@angular/core';
