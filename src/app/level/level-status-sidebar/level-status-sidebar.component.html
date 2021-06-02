@@ -25,11 +25,11 @@
   </ion-item>
 </ion-list>
 <ion-grid fixed>
-  <ion-row *ngFor="let inventoryrow of inventory.getInventoryItems(4)">
-    <ion-col *ngFor="let inventoryblock of inventoryrow">
+  <ion-row *ngFor="let inventoryRow of inventory.getInventoryItems(4)">
+    <ion-col *ngFor="let inventoryBlock of inventoryRow">
       <div class="inventoryCell">
-        <ion-thumbnail *ngIf="inventoryblock != null">
-          <ion-img [src]="inventoryblock?.imageSource"></ion-img>
+        <ion-thumbnail *ngIf="inventoryBlock != null">
+          <ion-img [src]="inventoryBlock?.imageSource"></ion-img>
         </ion-thumbnail>
       </div>
     </ion-col>

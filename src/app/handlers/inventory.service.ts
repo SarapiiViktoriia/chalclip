@@ -12,7 +12,7 @@ export class InventoryHandlerService {
       this.inventory.push(new EmptyBlock(null));
     }
   }
-  public getInventoryItems(elementsPerArray: number): Array<Array<GameBlock>> {
+  public getInventoryItems(elementsPerArray: number): Array<Array<GameBlock>> { 
     const dimensionalInventory = new Array<Array<GameBlock>>(0);
     for (let index = 0; index < (this.inventorySize / elementsPerArray); index++) {
       dimensionalInventory[index] = new Array<GameBlock>(0);
