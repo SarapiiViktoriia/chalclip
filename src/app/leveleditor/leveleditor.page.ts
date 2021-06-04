@@ -13,6 +13,7 @@ export class LeveleditorPage implements OnInit {
   constructor(private levelHandler: LevelHandlerService) {}
   ngOnInit(): void {
     this.levelGrid = this.levelHandler.getLevelGridTiles();
+    console.log('Loaded grid items', this.levelGrid);
   }
   @HostListener('document:keydown', ['$event']) 
   keyListenerEvent(event: KeyboardEvent) {
