@@ -1,3 +1,4 @@
+import { GameBlockFactory } from './../helper/GameBlockFactory';
 import { Player } from '../models/gameBlocks/player';
 import { InventoryHandlerService } from './inventory.service';
 import { EmptyBlock } from '../models/gameBlocks/empty-block';
@@ -15,8 +16,24 @@ export class LevelHandlerService {
   private tiles: GameBlock[][][] = new Array<Array<Array<GameBlock>>>(0);
   public player: Player;
   protected inventory: InventoryHandlerService = new InventoryHandlerService();
+  public levelName: string;
   constructor() {
     this.loadLevel();
+  }
+  public deserialize(input: any): LevelHandlerService {
+    this.levelName = input.levelName;
+    for (let yPosition = 0; yPosition < this.tiles.length; yPosition++) {
+      for (let xPosition = 0; xPosition < this.tiles[yPosition].length; xPosition++) {
+        for (let zPosition = 0; zPosition < this.tiles[yPosition][xPosition].length; zPosition++) {
+          const tmpObj = input.stack[yPosition][xPosition][zPosition];
+          this.tiles[yPosition][xPosition][zPosition] = GameBlockFactory.createGameBlock(tmpObj, this);
+          if (this.tiles[yPosition][xPosition][zPosition] instanceof Player) {
+            this.player = this.tiles[yPosition][xPosition][zPosition];
+          }
+        }
+      }
+    }
+    return this;
   }
   private loadLevel() {
     for (let y = 0; y < 9; y++) {
@@ -91,8 +108,10 @@ export class LevelHandlerService {
   public executeCanMoveFromHere(blockToMove: GameBlock, direction: MoveDirection, currentPositionStack: Array<GameBlock>): boolean {
     let canMoveFromHere = true;
     currentPositionStack.forEach(block => {
-      if (!block.canMoveFromHere(blockToMove, direction)) {
-        canMoveFromHere = false;
+      if (block !== undefined) {
+        if (!block.canMoveFromHere(blockToMove, direction)) {
+          canMoveFromHere = false;
+        }
       }
     });
     return canMoveFromHere;
@@ -100,25 +119,33 @@ export class LevelHandlerService {
   public executeCanMoveToHere(blockToMove: GameBlock, direction: MoveDirection, newPositionStack: Array<GameBlock>): boolean {
     let canMoveToHere = true;
     newPositionStack.forEach(block => {
-      if (!block.canMoveToHere(blockToMove, direction)) {
-        canMoveToHere = false;
+      if (block !== undefined) {
+        if (!block.canMoveToHere(blockToMove, direction)) {
+          canMoveToHere = false;
+        }
       }
     });
     return canMoveToHere;
   }
   private executePreCheckEvent(blockToMove: GameBlock, direction: MoveDirection, blockStack: Array<GameBlock>) {
     blockStack.forEach(element => {
-      element.preCheckEvent(blockToMove, direction, blockStack);
+      if (element !== undefined) {
+        element.preCheckEvent(blockToMove, direction, blockStack);
+      }
     });
   }
   private executePreMoveEvent(blockToMove: GameBlock, direction: MoveDirection, blockStack: Array<GameBlock>) {
     blockStack.forEach(element => {
-      element.preMoveEvent(blockToMove, direction, blockStack);
+      if (element !== undefined) {
+        element.preMoveEvent(blockToMove, direction, blockStack);
+      }
     });
   }
   private executePostMoveEvent(blockToMove: GameBlock, direction: MoveDirection, blockStack: Array<GameBlock>) {
     blockStack.forEach(element => {
-      element.postMoveEvent(blockToMove, direction, blockStack);
+      if (element !== undefined) {
+        element.postMoveEvent(blockToMove, direction, blockStack);
+      }
     });
   }
   public getNewPosition(position: number[], direction: MoveDirection): number[] {
@@ -167,8 +194,7 @@ export class LevelHandlerService {
     return this.inventory;
   }
   public createNewBlockAtPosition(block: GameBlock, position: Array<number>) {
-    const newBlockInstance = Object.create(block);
-    newBlockInstance.getInstance(this);
+    const newBlockInstance = GameBlockFactory.createGameBlock(block, this);
     if (block instanceof Player) {
       const emptyBlock = new EmptyBlock(this);
       this.tiles[position[0]][position[1]][StackLayer.block] = emptyBlock;
@@ -185,5 +211,17 @@ export class LevelHandlerService {
     }
     const zPosition = newBlockInstance.getStackZCoord();
     this.tiles[position[0]][position[1]][zPosition] = newBlockInstance;
+  }
+  public serializeLevel(): string {
+    return JSON.stringify(this, this.replacer);
+  }
+  public replacer(key: string, value: any) {
+    const ignoredProperties = [
+      'levelHandler'
+    ];
+    if (ignoredProperties.includes(key)) {
+      return undefined;
+    }
+    return value;
   }
 }

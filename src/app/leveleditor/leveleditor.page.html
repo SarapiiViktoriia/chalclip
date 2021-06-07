@@ -10,4 +10,9 @@
   <app-sidebar>
     <app-items-sidebar (itemSelect)="itemClicked($event)"></app-items-sidebar>
   </app-sidebar>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="optionsClicked()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-split-pane>

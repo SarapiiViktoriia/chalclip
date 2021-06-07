@@ -1,7 +1,10 @@
+import { OptionsPage } from './options/options.page';
+import { ModalController } from '@ionic/angular';
 import { MoveDirection } from './../models/move-direction';
 import { LevelHandlerService } from 'src/app/handlers/level.service';
 import { Component, OnInit, HostListener } from '@angular/core';
 import { GameBlock } from '../models/gameBlocks/game-block';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-leveleditor',
   templateUrl: './leveleditor.page.html',
@@ -10,7 +13,11 @@ import { GameBlock } from '../models/gameBlocks/game-block';
 export class LeveleditorPage implements OnInit {
   public levelGrid: Array<Array<Array<GameBlock>>>;
   public selectedItem: GameBlock;
-  constructor(private levelHandler: LevelHandlerService) {}
+  constructor(
+    private levelHandler: LevelHandlerService,
+    private modalController: ModalController,
+    private http: HttpClient
+  ) { }
   ngOnInit(): void {
     this.levelGrid = this.levelHandler.getLevelGridTiles();
     console.log('Loaded grid items', this.levelGrid);
@@ -39,5 +46,18 @@ export class LeveleditorPage implements OnInit {
     const position = this.levelHandler.getBlockPosition(blockItem);
     this.levelHandler.createNewBlockAtPosition(this.selectedItem, position);
     console.log('replaced old block', blockItem, 'with', this.selectedItem);
+  }
+  public optionsClicked() {
+    this.presentModal();
+  }
+  private async presentModal() {
+    const modal = await this.modalController.create({
+      component: OptionsPage,
+      componentProps: {
+        levelHandler: this.levelHandler,
+        http: this.http
+      }
+    });
+    return await modal.present();
   }
 }
