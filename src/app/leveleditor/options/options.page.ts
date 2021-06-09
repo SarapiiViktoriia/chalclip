@@ -1,6 +1,6 @@
+import { LevelHandlerService } from 'src/app/handlers/level.service';
 import { LevelSaverService } from '../../handlers/level-saver.service';
 import { NavController, NavParams } from '@ionic/angular';
-import { LevelHandlerService } from 'src/app/handlers/level-handler.service';
 import { Component } from '@angular/core';
 @Component({
   selector: 'app-options',

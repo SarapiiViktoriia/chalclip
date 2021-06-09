@@ -12,12 +12,18 @@ const routes: Routes = [
   }
 ];
 @NgModule({
+  declarations: [
+    OptionsPage
+  ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     HttpClientModule,
     RouterModule.forChild(routes)
+  ],
+  exports: [
+    OptionsPage
   ]
 })
 export class OptionsPageModule { }

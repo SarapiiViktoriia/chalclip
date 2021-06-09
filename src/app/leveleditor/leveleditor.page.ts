@@ -14,9 +14,7 @@ export class LeveleditorPage implements OnInit {
   public levelGrid: Array<Array<Array<GameBlock>>>;
   public selectedItem: GameBlock;
   constructor(
-    private levelHandler: LevelHandlerService,
-    private modalController: ModalController,
-    private http: HttpClient
+    private levelHandler: LevelHandlerService
   ) { }
   ngOnInit(): void {
     this.levelGrid = this.levelHandler.getLevelGridTiles();
@@ -46,18 +44,5 @@ export class LeveleditorPage implements OnInit {
     const position = this.levelHandler.getBlockPosition(blockItem);
     this.levelHandler.createNewBlockAtPosition(this.selectedItem, position);
     console.log('replaced old block', blockItem, 'with', this.selectedItem);
-  }
-  public optionsClicked() {
-    this.presentModal();
-  }
-  private async presentModal() {
-    const modal = await this.modalController.create({
-      component: OptionsPage,
-      componentProps: {
-        levelHandler: this.levelHandler,
-        http: this.http
-      }
-    });
-    return await modal.present();
   }
 }

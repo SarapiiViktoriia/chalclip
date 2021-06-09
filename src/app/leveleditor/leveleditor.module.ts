@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { OptionsPage } from './options/options.page';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -27,7 +27,9 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    HttpClientModule
+    HttpClientModule,
+    OptionsPage
   ],
+  entryComponents: [OptionsPage]
 })
 export class LeveleditorPageModule { }

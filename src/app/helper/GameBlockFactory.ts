@@ -1,6 +1,6 @@
+import { LevelHandlerService } from 'src/app/handlers/level.service';
 import { EmptyBlock } from './../models/gameBlocks/empty-block';
 import { MoveableBlock } from './../models/gameBlocks/moveable-block';
-import { LevelHandlerService } from 'src/app/handlers/level-handler.service';
 import { SolidBlock } from './../models/gameBlocks/solid-block';
 import { Player } from './../models/gameBlocks/player';
 import { GameBlock } from '../models/gameBlocks/game-block';
