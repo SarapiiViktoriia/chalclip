@@ -4,7 +4,7 @@ import { MoveableBlock } from './../models/gameBlocks/moveable-block';
 import { SolidBlock } from './../models/gameBlocks/solid-block';
 import { Player } from './../models/gameBlocks/player';
 import { GameBlock } from '../models/gameBlocks/game-block';
-import { WoodBackground } from '../models/gameBlocks/Background/wood-background';
+import { WoodBackground } from '../models/gameBlocks/background/wood-background';
 export class GameBlockFactory {
   static createGameBlock<T extends GameBlock>(block: GameBlock, levelHandler: LevelHandlerService): T {
     if (block == null) {
