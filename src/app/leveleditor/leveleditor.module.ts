@@ -1,4 +1,4 @@
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { OptionsPage } from './options/options.page';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -26,8 +26,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
     HttpClientModule,
+    RouterModule.forChild(routes),
     OptionsPage
   ],
   entryComponents: [OptionsPage]
