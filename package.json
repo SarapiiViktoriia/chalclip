@@ -10,8 +10,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test -- --no-watch --no-progress",
-    "testKeep": "ng test",
+    "test": "ng test -- --no-watch --no-progress --code-coverage&&npm run e2e # for CI",
+    "test:dev": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
