@@ -12,6 +12,7 @@
     "build": "ng build",
     "test": "ng test -- --no-watch --no-progress&&npm run e2e # for CI",
     "test:dev": "ng test",
+    "test:devFirefox": "ng test --browsers=Firefox",
     "lint": "ng lint && npm run lint:styles",
     "lint:styles": "npx stylelint \"**/*.scss\"",
     "e2e": "ng e2e"
@@ -60,6 +61,7 @@
     "karma": "~4.1.0",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.1",
+    "karma-firefox-launcher": "^1.2.0",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
     "protractor": "~5.4.0",
