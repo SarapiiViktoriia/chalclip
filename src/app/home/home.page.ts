@@ -14,6 +14,7 @@ export class HomePage implements OnInit {
   constructor(private levelHandlerService: LevelHandlerService, private modalController: ModalController) {
   }
   ngOnInit() {
+    this.levelGrid = this.levelHandlerService.getLevelGridTiles();
   }
   async levelTimedOut() {
   }
