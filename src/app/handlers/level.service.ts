@@ -22,7 +22,7 @@ export class LevelHandlerService {
     for (let y = 0; y < 9; y++) {
       this.tiles[y] = new Array<Array<GameBlock>>(0);
       for (let x = 0; x < 9; x++) {
-        this.tiles[y][x] = new Array<GameBlock>(Object.keys(StackLayer).length / 2);
+        this.tiles[y][x] = new Array<GameBlock>(this.getPaneCount());
         this.tiles[y][x][StackLayer.texture] = new WoodBackground(this);
         this.tiles[y][x][StackLayer.block] = new EmptyBlock(this);
         this.tiles[y][x][StackLayer.player] = new EmptyBlock(this);
@@ -41,15 +41,32 @@ export class LevelHandlerService {
   public getZStack(position: Array<number>): Array<GameBlock> {
     return this.tiles[position[0]][position[1]];
   }
+  public getTilesGroupedPerPane(): Array<Array<Array<GameBlock>>> {
+    const paneArray: GameBlock[][][] = new Array<Array<Array<GameBlock>>>(this.getPaneCount());
+    for (let yCoord = 0; yCoord < this.tiles.length; yCoord++) {
+      const row = this.tiles[yCoord];
+      for (let xCoord = 0; xCoord < row.length; xCoord++) {
+        const column = row[xCoord];
+        for (let zCoord = 0; zCoord < row.length; zCoord++) {
+          const tile = column[zCoord];
+          paneArray[zCoord][yCoord][xCoord] = tile;
+        }
+      }
+    }
+    return paneArray;
+  }
+  private getPaneCount(): number {
+    return Object.keys(StackLayer).length / 2;
+  }
   public getBlockPosition(block: GameBlock): number[] {
     const location = new Array(3);
     this.tiles.forEach((element, yCoord) => {
-      element.forEach((element2, xCoord) => {
+      element.forEach((element2, xCoord) => { 
         const zCoord = element2.indexOf(block);
         if (zCoord !== -1) {
           location[0] = yCoord;
           location[1] = xCoord;
-          location[2] = zCoord;
+          location[2] = zCoord; 
         }
       });
     });
