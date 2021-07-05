@@ -19,10 +19,10 @@ export class LevelHandlerService {
     this.loadLevel();
   }
   private loadLevel() {
-    for (let y = 0; y < 9; y++) {
+    for (let y = 0; y < this.getSizeOfDimension('y'); y++) {
       this.tiles[y] = new Array<Array<GameBlock>>(0);
-      for (let x = 0; x < 9; x++) {
-        this.tiles[y][x] = new Array<GameBlock>(this.getPaneCount());
+      for (let x = 0; x < this.getSizeOfDimension('x'); x++) {
+        this.tiles[y][x] = new Array<GameBlock>(this.getSizeOfDimension('z'));
         this.tiles[y][x][StackLayer.texture] = new WoodBackground(this);
         this.tiles[y][x][StackLayer.block] = new EmptyBlock(this);
         this.tiles[y][x][StackLayer.player] = new EmptyBlock(this);
@@ -42,21 +42,38 @@ export class LevelHandlerService {
     return this.tiles[position[0]][position[1]];
   }
   public getTilesGroupedPerPane(): Array<Array<Array<GameBlock>>> {
-    const paneArray: GameBlock[][][] = new Array<Array<Array<GameBlock>>>(this.getPaneCount());
+    let paneArray: GameBlock[][][] = new Array<Array<Array<GameBlock>>>(this.getSizeOfDimension('z'));
+    paneArray = new Array(this.getSizeOfDimension('z')).fill(null).map(() => (
+      new Array(this.getSizeOfDimension('y')).fill(null).map(() => (
+        new Array(this.getSizeOfDimension('x'))
+      )))
+    );
     for (let yCoord = 0; yCoord < this.tiles.length; yCoord++) {
       const row = this.tiles[yCoord];
       for (let xCoord = 0; xCoord < row.length; xCoord++) {
-        const column = row[xCoord];
-        for (let zCoord = 0; zCoord < row.length; zCoord++) {
-          const tile = column[zCoord];
+        const stack = row[xCoord];
+        for (let zCoord = 0; zCoord < stack.length; zCoord++) {
+          let tile = stack[zCoord];
+          if (!tile) {
+            tile = null;
+          }
           paneArray[zCoord][yCoord][xCoord] = tile;
         }
       }
     }
     return paneArray;
   }
-  private getPaneCount(): number {
-    return Object.keys(StackLayer).length / 2;
+  private getSizeOfDimension(dimension: 'y'|'x'|'z'): number {
+    switch (dimension) {
+      case 'y':
+        return 9;
+      case 'x':
+        return 9;
+      case 'z':
+        return Object.keys(StackLayer).length / 2;
+      default:
+        throw new TypeError('wrong dimension passed.');
+      }
   }
   public getBlockPosition(block: GameBlock): number[] {
     const location = new Array(3);

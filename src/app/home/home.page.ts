@@ -10,12 +10,9 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  public levelGrid: Array<Array<Array<GameBlock>>>;
   constructor(private levelHandlerService: LevelHandlerService, private modalController: ModalController) {
   }
-  ngOnInit() {
-    this.levelGrid = this.levelHandlerService.getLevelGridTiles();
-  }
+  ngOnInit() {  }
   async levelTimedOut() {
   }
   @HostListener('document:keydown', ['$event'])
