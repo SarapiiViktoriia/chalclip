@@ -7,7 +7,6 @@ import { HomePage } from './home.page';
 import { LevelGridComponent } from '../level/level-grid/level-grid.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { LevelStatusSidebarComponent } from '../level/level-status-sidebar/level-status-sidebar.component';
-import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     HomePage,
@@ -19,7 +18,6 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     FormsModule,
     IonicModule,
-    HttpClientModule,
     RouterModule.forChild([
       {
         path: '',

@@ -8,14 +8,9 @@ import { GameBlock } from '../models/gameBlocks/game-block';
   styleUrls: ['./leveleditor.page.scss']
 })
 export class LeveleditorPage implements OnInit {
-  public levelGrid: Array<Array<Array<GameBlock>>>;
   public selectedItem: GameBlock;
-  constructor(
-    private levelHandler: LevelHandlerService
-  ) { }
+  constructor(private levelHandler: LevelHandlerService) {}
   ngOnInit(): void {
-    this.levelGrid = this.levelHandler.getLevelGridTiles();
-    console.log('Loaded grid items', this.levelGrid);
   }
   @HostListener('document:keydown', ['$event']) 
   keyListenerEvent(event: KeyboardEvent) {

@@ -1,9 +1,9 @@
 <ion-content class="levelGrid">
   <ion-grid fixed>
     <ion-row *ngFor="let row of levelGrid">
-      <ion-col *ngFor="let column of row">
-        <div class="levelTile" *ngFor="let tile of column" (click)="tileClicked(tile)">
-          <ion-thumbnail *ngIf="tile != null">
+      <ion-col class="tileStack" *ngFor="let column of row">
+        <div class="zTile" *ngFor="let tile of column" (click)="tileClicked(tile)">
+          <ion-thumbnail *ngIf="tile != null" [attr.aria-label]="tile.name">
             <ion-img [src]="tile?.$imageSource"></ion-img>
           </ion-thumbnail>
         </div>

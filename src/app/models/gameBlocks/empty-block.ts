@@ -5,14 +5,9 @@ import { GameBlock } from './game-block';
 export class EmptyBlock extends GameBlock {
   constructor(levelHandler: LevelHandlerService) {
     super(levelHandler);
-    this.$imageSource = 'assets/empty.bmp';
+    this.$imageSource = '';
   }
-  public static '@type' = 'Placeholder';
-  public '@type' = 'Placeholder';
   public name = 'Placeholder';
-  public static getInstance(levelHandler: LevelHandlerService): EmptyBlock {
-    return new EmptyBlock(levelHandler);
-  }
   public canMoveToHere(blockToMove: GameBlock, direction: MoveDirection) {
     return true;
   }
