@@ -3,8 +3,8 @@
     <ion-row *ngFor="let row of levelGrid">
       <ion-col class="tileStack" *ngFor="let column of row">
         <div class="zTile" *ngFor="let tile of column" (click)="tileClicked(tile)">
-          <ion-thumbnail *ngIf="tile != null" [attr.aria-label]="tile.name">
-            <ion-img [src]="tile?.$imageSource"></ion-img>
+          <ion-thumbnail *ngIf="tile && tile?.$imageSource" [attr.aria-label]="tile.name">
+            <ion-img [src]="tile.$imageSource" [alt]="tile.name"></ion-img>
           </ion-thumbnail>
         </div>
       </ion-col>
