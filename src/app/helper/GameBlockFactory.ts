@@ -24,7 +24,7 @@ export class GameBlockFactory {
       case undefined:
         return undefined;
       default:
-        throw new Error(block['@type'] + ' is currently not supported');
+        throw new TypeError(block['@type'] + ' is currently not supported');
     }
   }
 }
