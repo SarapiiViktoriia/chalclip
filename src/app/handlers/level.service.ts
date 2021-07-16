@@ -26,9 +26,12 @@ export class LevelHandlerService {
       for (let xPosition = 0; xPosition < this.tiles[yPosition].length; xPosition++) {
         for (let zPosition = 0; zPosition < this.tiles[yPosition][xPosition].length; zPosition++) {
           const tmpObj = input.tiles[yPosition][xPosition][zPosition];
-          this.tiles[yPosition][xPosition][zPosition] = GameBlockFactory.createGameBlock(tmpObj, this);
-          if (this.tiles[yPosition][xPosition][zPosition] instanceof Player) {
-            this.player = this.tiles[yPosition][xPosition][zPosition];
+          if (tmpObj) {
+            this.tiles[yPosition][xPosition][zPosition] = GameBlockFactory.createGameBlock(tmpObj, this);
+            this.tiles[yPosition][xPosition][zPosition].deserialize(tmpObj, [this]);
+            if (this.tiles[yPosition][xPosition][zPosition] instanceof Player) {
+              this.player = this.tiles[yPosition][xPosition][zPosition];
+            }
           }
         }
       }
