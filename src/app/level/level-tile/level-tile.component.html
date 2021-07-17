@@ -1,0 +1,8 @@
+<div [attr.aria-label]="tile?.name" [attr.title]="showTileTitle ? tile?.name : null">
+  <ion-thumbnail *ngIf="useIonThumbnail;else simpleImage">
+    <ion-img *ngIf="tile && tile?.$imageSource" [src]="tile?.$imageSource" [alt]="tile?.name"></ion-img>
+  </ion-thumbnail>
+</div>
+<ng-template #simpleImage>
+  <ion-img *ngIf="tile && tile?.$imageSource" [src]="tile?.$imageSource" [alt]="tile?.name"></ion-img>
+</ng-template>

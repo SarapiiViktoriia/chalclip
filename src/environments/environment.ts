@@ -1,3 +1,5 @@
 export const environment = {
-  production: false
+  production: false,
+  showTileTitle: true,
+  useIonThumbnail: false,
 };

@@ -7,12 +7,7 @@ export class Player extends GameBlock {
     super(levelHandler);
     this.$imageSource = 'assets/person_down.bmp';
   }
-  public static '@type' = 'Player';
-  public '@type' = 'Player';
   public name = 'Clippy';
-  public static getInstance(levelHandler: LevelHandlerService): Player {
-    return new Player(levelHandler);
-  }
   public preCheckEvent(blockToMove: GameBlock, direction: MoveDirection, blockStack: Array<GameBlock>) {
     switch (direction) {
       case MoveDirection.north:
@@ -31,5 +26,8 @@ export class Player extends GameBlock {
   }
   public getStackZCoord(): StackLayer {
     return StackLayer.player;
+  }
+  public getInstance(levelHandler: LevelHandlerService): Player {
+    return new Player(levelHandler);
   }
 }

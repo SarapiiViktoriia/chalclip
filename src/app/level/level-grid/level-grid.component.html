@@ -1,12 +1,8 @@
 <ion-content class="levelGrid">
   <ion-grid fixed>
     <ion-row *ngFor="let row of levelGrid">
-      <ion-col *ngFor="let column of row">
-        <div class="levelTile" *ngFor="let tile of column" (click)="tileClicked(tile)">
-          <ion-thumbnail *ngIf="tile != null">
-            <ion-img [src]="tile?.$imageSource"></ion-img>
-          </ion-thumbnail>
-        </div>
+      <ion-col class="tileStack" *ngFor="let column of row">
+        <app-level-tile class="zTile" *ngFor="let tile of column" [tile]="tile" (click)="tileClicked(tile)"></app-level-tile>
       </ion-col>
     </ion-row>
   </ion-grid>
