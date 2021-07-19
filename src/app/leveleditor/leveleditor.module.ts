@@ -1,3 +1,5 @@
+import { HttpClientModule } from '@angular/common/http';
+import { OptionsComponent } from './options/options.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -7,7 +9,6 @@ import { LeveleditorPage } from './leveleditor.page';
 import { LevelGridComponent } from '../level/level-grid/level-grid.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { ItemsSidebarComponent } from './items-sidebar/items-sidebar.component';
-import { LevelTileComponent } from '../level/level-tile/level-tile.component';
 const routes: Routes = [
   {
     path: '',
@@ -20,13 +21,15 @@ const routes: Routes = [
     LevelGridComponent,
     SidebarComponent,
     ItemsSidebarComponent,
-    LevelTileComponent
+    OptionsComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    HttpClientModule,
     RouterModule.forChild(routes)
-  ]
+  ],
+  entryComponents: [OptionsComponent]
 })
-export class LeveleditorPageModule {}
+export class LeveleditorPageModule { }

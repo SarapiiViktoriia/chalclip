@@ -1,18 +1,18 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { LevelTileComponent } from './level-tile.component';
-describe('LevelTileComponent', () => {
-  let component: LevelTileComponent;
-  let fixture: ComponentFixture<LevelTileComponent>;
+import { OptionsComponent } from './options.component';
+describe('OptionsPage', () => {
+  let component: OptionsComponent;
+  let fixture: ComponentFixture<OptionsComponent>;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LevelTileComponent ],
+      declarations: [ OptionsComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
   beforeEach(() => {
-    fixture = TestBed.createComponent(LevelTileComponent);
+    fixture = TestBed.createComponent(OptionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

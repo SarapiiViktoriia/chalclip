@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>options</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item>
+    <ion-input type="text" placeholder="LevelName" (input)="levelName = $event.target.value"></ion-input>
+    <ion-button (click)="downloadLevel()">
+      Download this level
+    </ion-button>
+    <ion-button (click)="addLevel()">
+      Add this Level to the Levellist
+    </ion-button>
+    <div id="json"></div>
+  </ion-item>
+  <ion-item>
+    <ion-button (click)="downloadLevelList()">
+      Download level list
+    </ion-button>
+    <div id="json"></div>
+  </ion-item>
+  <ion-item>
+    <ion-input type="file" placeholder="LevelFile" (change)="changeLevelFile($event)"></ion-input>
+    <ion-button (click)="uploadLevel()">
+      Add a level to Editor
+    </ion-button>
+  </ion-item>
+  <ion-item *ngIf="levelList.length > 0">
+    <ion-reorder-group disabled="false">
+      <ion-item *ngFor="let levelName of levelList">
+        <ion-label>
+          {{levelName}}
+        </ion-label>
+        <ion-reorder>
+        </ion-reorder>
+      </ion-item>
+    </ion-reorder-group>
+  </ion-item>
+</ion-content>

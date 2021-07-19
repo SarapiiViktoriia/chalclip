@@ -12,13 +12,3 @@ ion-col {
   flex: 0;
   position: relative;
 }
-.tileStack {
-  width: 50px;
-  height: 50px;
-  min-height: 50px;
-  min-width: 50px;
-}
-/* stack tiles on z axis on top of each other */
-.zTile {
-  position: absolute;
-}
