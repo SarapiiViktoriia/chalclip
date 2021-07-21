@@ -1,0 +1,12 @@
+image: nodejscn/node
+before_script:
+  - sudo npm install -g @angular/cli
+  - ng version
+pages:
+  script:
+  - ionic build --prod
+  artifacts:
+    paths:
+    - dist
+  only:
+    - master
