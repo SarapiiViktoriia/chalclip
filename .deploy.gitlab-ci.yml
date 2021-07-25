@@ -1,7 +1,8 @@
 image: nodejscn/node
-before_script:
-  - sudo npm install -g @angular/cli
-  - ng version
+default:
+  before_script:
+    - sudo npm install -g @angular/cli
+    - ng version
 pages:
   script:
   - ionic build --prod
