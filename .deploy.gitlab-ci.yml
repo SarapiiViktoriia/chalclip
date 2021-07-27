@@ -3,9 +3,11 @@ default:
   before_script:
     - sudo npm install -g @angular/cli
     - ng version
+    - export NODE_ENV=production
 pages:
   script:
-  - ionic build --prod
+    - npm install --only=prod
+    - ionic build --prod
   artifacts:
     paths:
     - dist
