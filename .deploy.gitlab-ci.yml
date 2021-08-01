@@ -1,7 +1,7 @@
 image: nodejscn/node
 default:
   before_script:
-    - sudo npm install -g @angular/cli
+    - npm install -g @angular/cli
     - ng version
     - export NODE_ENV=production
 pages:
