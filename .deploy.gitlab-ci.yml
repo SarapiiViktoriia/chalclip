@@ -8,8 +8,10 @@ pages:
   script:
     - npm install --only=prod
     - ionic build --prod
+  after_script:
+    - mv dist public
   artifacts:
     paths:
-    - dist
+      - public
   only:
     - master
