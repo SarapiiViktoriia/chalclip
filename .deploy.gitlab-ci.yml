@@ -10,6 +10,7 @@ pages:
     - ionic build --prod
   after_script:
     - mv dist public
+    - export DAST_WEBSITE="https://pages.gitlab.io/clippyschallenge/clippyschallenge"
   artifacts:
     paths:
       - public
