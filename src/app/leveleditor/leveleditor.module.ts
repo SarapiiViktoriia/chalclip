@@ -1,5 +1,3 @@
-import { HttpClientModule } from '@angular/common/http';
-import { OptionsComponent } from './options/options.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -20,16 +18,13 @@ const routes: Routes = [
     LeveleditorPage,
     LevelGridComponent,
     SidebarComponent,
-    ItemsSidebarComponent,
-    OptionsComponent
+    ItemsSidebarComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HttpClientModule,
     RouterModule.forChild(routes)
-  ],
-  entryComponents: [OptionsComponent]
+  ]
 })
-export class LeveleditorPageModule { }
+export class LeveleditorPageModule {}

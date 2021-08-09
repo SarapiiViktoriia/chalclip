@@ -2,8 +2,6 @@ import { StackLayer } from './../stackLayer';
 import { MoveDirection } from './../move-direction';
 import { LevelHandlerService } from '../../handlers/level.service';
 export abstract class GameBlock {
-  public static '@type' = 'abstract';
-  public '@type' = 'abstract';
   private imageSource: string;
   protected levelHandler: LevelHandlerService;
   constructor(levelHandler: LevelHandlerService) {
@@ -11,16 +9,6 @@ export abstract class GameBlock {
     this.imageSource = 'assets/default.bmp';
   }
   public abstract readonly name: string;
-  public deserialize(input: GameBlock, parameters: Array<object>): GameBlock {
-    this.imageSource = input.imageSource;
-    this.levelHandler = input.levelHandler;
-    parameters.forEach(element => {
-      if (element instanceof LevelHandlerService) {
-        this.levelHandler = element;
-      }
-    });
-    return this;
-  }
   public canMoveFromHere(blockToMove: GameBlock, direction: MoveDirection): boolean {
     return true;
   }
