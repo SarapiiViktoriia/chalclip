@@ -1,5 +1,5 @@
-image: nodejscn/node
 pages:
+  image: nodejscn/node
   stage: pages
   before_script:
     - npm install -g @angular/cli
@@ -14,5 +14,3 @@ pages:
   artifacts:
     paths:
       - public
-  only:
-    - master
