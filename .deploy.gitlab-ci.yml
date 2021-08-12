@@ -7,7 +7,7 @@ pages:
     - export NODE_ENV=production
   script:
     - npm install --only=prod
-    - ionic build --prod
+    - ng build --prod
   after_script:
     - mv dist public
     - export DAST_WEBSITE="https://pages.gitlab.io/clippyschallenge/clippyschallenge"
