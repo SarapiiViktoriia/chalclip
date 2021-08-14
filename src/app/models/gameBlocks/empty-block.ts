@@ -7,7 +7,12 @@ export class EmptyBlock extends GameBlock {
     super(levelHandler);
     this.$imageSource = 'assets/empty.bmp';
   }
+  public static '@type' = 'Placeholder';
+  public '@type' = 'Placeholder';
   public name = 'Placeholder';
+  public static getInstance(levelHandler: LevelHandlerService): EmptyBlock {
+    return new EmptyBlock(levelHandler);
+  }
   public canMoveToHere(blockToMove: GameBlock, direction: MoveDirection) {
     return true;
   }
