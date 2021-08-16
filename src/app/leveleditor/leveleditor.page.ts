@@ -21,13 +21,9 @@ export class LeveleditorPage implements OnInit {
   keyListenerEvent(event: KeyboardEvent) {
     if (this.levelHandler.player != null) {
       if (event.key === 'ArrowUp' || event.key === 'w') {
-        this.levelHandler.moveBlock(this.levelHandler.player, MoveDirection.north);
       } else if (event.key === 'ArrowDown' || event.key === 's') {
-        this.levelHandler.moveBlock(this.levelHandler.player, MoveDirection.south);
       } else if (event.key === 'ArrowLeft' || event.key === 'a') {
-        this.levelHandler.moveBlock(this.levelHandler.player, MoveDirection.west);
       } else if (event.key === 'ArrowRight' || event.key === 'd') {
-        this.levelHandler.moveBlock(this.levelHandler.player, MoveDirection.east);
       }
     }
   }
