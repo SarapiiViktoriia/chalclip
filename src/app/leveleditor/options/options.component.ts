@@ -2,6 +2,7 @@ import { LevelHandlerService } from 'src/app/handlers/level.service';
 import { LevelSaverService } from '../../handlers/level-saver.service';
 import { NavController, NavParams } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
+import JsonLevelList from '../../../assets/levels/levelList.json';
 @Component({
   selector: 'app-options',
   templateUrl: './options.component.html',
@@ -12,15 +13,20 @@ export class OptionsComponent implements OnInit {
   public levelName: string;
   public levelFile: File;
   public isSaved = false;
-  public levelList: Array<string> = new Array<string>(0);
+  public levelList: Array<string> = JsonLevelList;
   constructor(
     public navCtrl: NavController,
     public levelService: LevelSaverService
   ) { }
   ngOnInit(): void {
   }
-  public changeLevelFile($event): void {
-    this.levelFile = $event.target.files[0];
+  public changeLevelFile(event): void {
+    this.levelFile = event.target.files[0];
+  }
+  public reorderLevelList(event): void {
+    const itemMove = this.levelList.splice(event.detail.from, 1)[0];
+    this.levelList.splice(event.detail.to, 0, itemMove);
+    event.detail.complete();
   }
   public uploadLevel() {
     const reader = new FileReader();
@@ -40,8 +46,9 @@ export class OptionsComponent implements OnInit {
     element.dispatchEvent(event);
   }
   public addLevel() {
-    if (!this.levelList.includes(this.levelName)) {
-      this.levelList.push(this.levelName);
+    const name = this.levelName.trim();
+    if (name !== '' && !this.levelList.includes(name)) {
+      this.levelList.push(name);
     }
   }
   public downloadLevelList() {

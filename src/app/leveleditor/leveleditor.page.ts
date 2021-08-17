@@ -14,10 +14,11 @@ export class LeveleditorPage implements OnInit {
     private levelHandler: LevelHandlerService
   ) { }
   ngOnInit(): void {
+    this.levelHandler.loadLevel('emptyLevel');
     this.levelGrid = this.levelHandler.getLevelGridTiles();
     console.log('Loaded grid items', this.levelGrid);
   }
-  @HostListener('document:keydown', ['$event']) 
+  @HostListener('document:keydown', ['$event'])
   keyListenerEvent(event: KeyboardEvent) {
     if (this.levelHandler.player != null) {
       if (event.key === 'ArrowUp' || event.key === 'w') {

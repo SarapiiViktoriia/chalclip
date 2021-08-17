@@ -39,8 +39,10 @@ export class LevelHandlerService {
     }
     return this;
   }
-  private loadLevel() {
-    if (!this.levelName) {
+  public loadLevel(levelName: string = '') {
+    if (levelName.trim() !== '') {
+      this.levelName = levelName;
+    } else if (!this.levelName) {
       this.levelName = this.levelList[0];
     } else {
       const index = this.levelList.indexOf(this.levelName);
