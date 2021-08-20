@@ -28,7 +28,9 @@ export class LevelHandlerService {
         const pane: GameBlock[] = new Array<GameBlock>();
         for (let zPosition = 0; zPosition < Object.keys(StackLayer).length / 2; zPosition++) {
           const tmpObj = input.tiles[yPosition][xPosition][zPosition];
-          if (tmpObj) {
+          if (!tmpObj) {
+            pane.push(GameBlockFactory.createGameBlock(new EmptyBlock(this), this));
+          } else {
             pane.push(GameBlockFactory.createGameBlock(tmpObj, this));
             pane[zPosition].deserialize(tmpObj, [this]);
             if (pane[zPosition] instanceof Player) {
