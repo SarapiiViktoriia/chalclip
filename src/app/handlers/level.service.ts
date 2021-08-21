@@ -22,6 +22,9 @@ export class LevelHandlerService {
   }
   public deserialize(input: LevelHandlerService): LevelHandlerService {
     this.levelName = input.levelName;
+    while (this.tiles.length !== 0) {
+      this.tiles.pop();
+    }
     for (let yPosition = 0; yPosition < 9; yPosition++) {
       const column: GameBlock[][] = new Array<Array<GameBlock>>();
       for (let xPosition = 0; xPosition < 9; xPosition++) {
