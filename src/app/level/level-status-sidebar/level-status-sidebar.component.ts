@@ -12,7 +12,7 @@ import { InventoryHandlerService } from 'src/app/handlers/inventory.service';
 export class LevelStatusSidebarComponent implements OnInit, OnDestroy {
   public battery = 0;
   public energy = 0;
-  public timeLeft = 5;
+  public timeLeft = 4;
   public inventory: InventoryHandlerService;
   private ngUnsubscribe = new Subject();
   @Output() levelTimeout = new EventEmitter();
