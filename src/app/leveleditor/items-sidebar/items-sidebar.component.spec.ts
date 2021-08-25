@@ -1,3 +1,5 @@
+import { ModalController } from '@ionic/angular';
+import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ItemsSidebarComponent } from './items-sidebar.component';
@@ -6,10 +8,11 @@ describe('ItemsSidebarComponent', () => {
   let fixture: ComponentFixture<ItemsSidebarComponent>;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ItemsSidebarComponent ],
+      declarations: [ItemsSidebarComponent],
+      imports: [HttpClientModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
-    .compileComponents();
+      .compileComponents();
   }));
   beforeEach(() => {
     fixture = TestBed.createComponent(ItemsSidebarComponent);

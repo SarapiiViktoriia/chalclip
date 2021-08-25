@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { LeveleditorPage } from './leveleditor.page';
@@ -6,10 +7,11 @@ describe('LeveleditorPage', () => {
   let fixture: ComponentFixture<LeveleditorPage>;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LeveleditorPage ],
+      declarations: [LeveleditorPage],
+      imports: [HttpClientModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
-    .compileComponents();
+      .compileComponents();
   }));
   beforeEach(() => {
     fixture = TestBed.createComponent(LeveleditorPage);
