@@ -1,5 +1,3 @@
-import { SwitchColor } from './../models/switchColor';
-import { BlockSwitchServiceService } from './block-switch-service.service';
 import { HttpClient } from '@angular/common/http';
 import { GameBlockFactory } from './../helper/GameBlockFactory';
 import { Player } from '../models/gameBlocks/player';
@@ -10,8 +8,6 @@ import { GameBlock } from '../models/gameBlocks/game-block';
 import { Injectable } from '@angular/core';
 import { StackLayer } from '../models/stackLayer';
 import JsonLevelList from '../../assets/levels/levelList.json';
-import { SwitchBlock } from '../models/gameBlocks/switch-block';
-import { SwitcherBlock } from '../models/gameBlocks/switcher-block';
 @Injectable({
   providedIn: 'root'
 })
@@ -21,9 +17,8 @@ export class LevelHandlerService {
   protected inventory: InventoryHandlerService = new InventoryHandlerService();
   public levelName: string;
   private levelList: Array<string> = JsonLevelList;
-  constructor(private http: HttpClient, private blockSwitchService: BlockSwitchServiceService) {
+  constructor(private http: HttpClient) {
     this.loadLevel();
-    blockSwitchService.loadLevel(this);
   }
   public deserialize(input: LevelHandlerService): LevelHandlerService {
     this.levelName = input.levelName;
@@ -218,7 +213,9 @@ export class LevelHandlerService {
       const emptyBlock2 = new EmptyBlock(this);
       if (this.player != null) {
         const oldPlayerPosition = this.getBlockPosition(this.player);
-        this.tiles[oldPlayerPosition[0]][oldPlayerPosition[1]][StackLayer.player] = emptyBlock2;
+        if (oldPlayerPosition[0] && oldPlayerPosition[1] && oldPlayerPosition[2]) {
+          this.tiles[oldPlayerPosition[0]][oldPlayerPosition[1]][StackLayer.player] = emptyBlock2;
+        }
       }
       this.player = newBlockInstance;
     } else if (block.getStackZCoord() === StackLayer.block && this.getBlockPosition(this.player).positionEqual(position)) {
@@ -241,8 +238,5 @@ export class LevelHandlerService {
       return undefined;
     }
     return value;
-  }
-  public SwitchColorGroup(color: SwitchColor, switcherBlock: SwitcherBlock): void {
-    this.blockSwitchService.SwitchColorGroup(color, switcherBlock);
   }
 }
