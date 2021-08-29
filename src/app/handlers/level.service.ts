@@ -1,3 +1,5 @@
+import { SwitchColor } from './../models/switchColor';
+import { BlockSwitchServiceService } from './block-switch-service.service';
 import { HttpClient } from '@angular/common/http';
 import { GameBlockFactory } from './../helper/GameBlockFactory';
 import { Player } from '../models/gameBlocks/player';
@@ -8,6 +10,8 @@ import { GameBlock } from '../models/gameBlocks/game-block';
 import { Injectable } from '@angular/core';
 import { StackLayer } from '../models/stackLayer';
 import JsonLevelList from '../../assets/levels/levelList.json';
+import { SwitchBlock } from '../models/gameBlocks/switch-block';
+import { SwitcherBlock } from '../models/gameBlocks/switcher-block';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,8 +21,9 @@ export class LevelHandlerService {
   protected inventory: InventoryHandlerService = new InventoryHandlerService();
   public levelName: string;
   private levelList: Array<string> = JsonLevelList;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private blockSwitchService: BlockSwitchServiceService) {
     this.loadLevel();
+    blockSwitchService.loadLevel(this);
   }
   public deserialize(input: LevelHandlerService): LevelHandlerService {
     this.levelName = input.levelName;
@@ -238,5 +243,8 @@ export class LevelHandlerService {
       return undefined;
     }
     return value;
+  }
+  public SwitchColorGroup(color: SwitchColor, switcherBlock: SwitcherBlock): void {
+    this.blockSwitchService.SwitchColorGroup(color, switcherBlock);
   }
 }
