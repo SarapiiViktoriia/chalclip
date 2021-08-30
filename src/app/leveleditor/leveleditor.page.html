@@ -9,5 +9,8 @@
   <app-level-grid [levelGrid]="levelGrid" (tileClick)="tileClicked($event)"></app-level-grid>
   <app-sidebar>
     <app-items-sidebar (itemSelect)="itemClicked($event)"></app-items-sidebar>
+    <ion-button (click)="itemClicked(null)">
+      unselect any item
+    </ion-button>
   </app-sidebar>
 </ion-split-pane>
