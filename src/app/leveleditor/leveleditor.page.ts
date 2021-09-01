@@ -10,6 +10,7 @@ import { GameBlock } from '../models/gameBlocks/game-block';
 export class LeveleditorPage implements OnInit {
   public levelGrid: Array<Array<Array<GameBlock>>>;
   public selectedItem: GameBlock;
+  public playerCanMove: boolean;
   constructor(
     private levelHandler: LevelHandlerService
   ) { }
@@ -21,10 +22,16 @@ export class LeveleditorPage implements OnInit {
   @HostListener('document:keydown', ['$event'])
   keyListenerEvent(event: KeyboardEvent) {
     if (this.levelHandler.player != null) {
-      if (event.key === 'ArrowUp' || event.key === 'w') {
-      } else if (event.key === 'ArrowDown' || event.key === 's') {
-      } else if (event.key === 'ArrowLeft' || event.key === 'a') {
-      } else if (event.key === 'ArrowRight' || event.key === 'd') {
+      if (this.playerCanMove) {
+        if (event.key === 'ArrowUp' || event.key === 'w') {
+          this.levelHandler.moveBlock(this.levelHandler.player, MoveDirection.north);
+        } else if (event.key === 'ArrowDown' || event.key === 's') {
+          this.levelHandler.moveBlock(this.levelHandler.player, MoveDirection.south);
+        } else if (event.key === 'ArrowLeft' || event.key === 'a') {
+          this.levelHandler.moveBlock(this.levelHandler.player, MoveDirection.west);
+        } else if (event.key === 'ArrowRight' || event.key === 'd') {
+          this.levelHandler.moveBlock(this.levelHandler.player, MoveDirection.east);
+        }
       }
     }
   }

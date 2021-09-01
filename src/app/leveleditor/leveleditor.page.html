@@ -12,5 +12,11 @@
     <ion-button (click)="itemClicked(null)">
       unselect any item
     </ion-button>
+    <ion-item>
+      <ion-label>
+        move Player
+      </ion-label>
+      <ion-toggle [(ngModel)]="playerCanMove"></ion-toggle>
+    </ion-item>
   </app-sidebar>
 </ion-split-pane>
