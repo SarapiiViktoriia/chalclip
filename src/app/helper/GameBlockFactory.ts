@@ -1,3 +1,4 @@
+import { GreenButton } from './../models/gameBlocks/green-button';
 import { LevelHandlerService } from 'src/app/handlers/level.service';
 import { EmptyBlock } from './../models/gameBlocks/empty-block';
 import { MoveableBlock } from './../models/gameBlocks/moveable-block';
@@ -21,6 +22,8 @@ export class GameBlockFactory {
         return EmptyBlock.getInstance(levelHandler) as any; 
       case WoodBackground['@type']:
         return WoodBackground.getInstance(levelHandler) as any; 
+      case GreenButton['@type']:
+        return GreenButton.getInstance(levelHandler) as any; 
       default:
         throw new TypeError(block['@type'] + ' is currently not supported');
     }

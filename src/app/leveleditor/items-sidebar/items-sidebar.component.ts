@@ -1,3 +1,4 @@
+import { GreenButton } from './../../models/gameBlocks/green-button';
 import { OptionsComponent } from './../options/options.component';
 import { HttpClient } from '@angular/common/http';
 import { ModalController } from '@ionic/angular';
@@ -25,7 +26,8 @@ export class ItemsSidebarComponent implements OnInit {
       new Player(this.levelHandler), 
       new MoveableBlock(this.levelHandler),
       new SolidBlock(this.levelHandler),
-      new WoodBackground(this.levelHandler)
+      new WoodBackground(this.levelHandler),
+      new GreenButton(this.levelHandler),
     );
     console.log('Loaded items', this.chipsChallenge1Items);
   }
