@@ -40,6 +40,7 @@ export class LeveleditorPage implements OnInit {
   }
   public tileClicked(blockItem: GameBlock) {
     if (!this.selectedItem) {
+      const test = blockItem.getSettings();
       return;
     }
     const position = this.levelHandler.getBlockPosition(blockItem);

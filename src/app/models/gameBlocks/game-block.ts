@@ -1,9 +1,12 @@
+import { levelEditorSetting } from 'src/app/helper/levelEditorSettingsProperty';
 import { StackLayer } from './../stackLayer';
 import { MoveDirection } from './../move-direction';
 import { LevelHandlerService } from '../../handlers/level.service';
+import 'reflect-metadata';
 export abstract class GameBlock {
   public static '@type' = 'abstract';
   public '@type' = 'abstract';
+  @levelEditorSetting()
   private imageSource: string;
   protected levelHandler: LevelHandlerService;
   constructor(levelHandler: LevelHandlerService) {
@@ -37,4 +40,17 @@ export abstract class GameBlock {
     this.imageSource = value;
   }
   public abstract getStackZCoord(): StackLayer;
+  public getSettings() {
+    const fields = Array<string>();
+    let target = Object.getPrototypeOf(this);
+    while (target !== Object.prototype) {
+      const childFields = Reflect.getOwnMetadata('levelEditorSetting', target) || []; 
+      childFields.forEach(element => {
+        fields.push(element);
+        fields.push(typeof target[element]);
+      });
+      target = Object.getPrototypeOf(target);
+    }
+    return fields;
+  }
 }
