@@ -18,5 +18,13 @@
       </ion-label>
       <ion-toggle [(ngModel)]="playerCanMove"></ion-toggle>
     </ion-item>
+    <ion-list>
+      <ion-label>
+        Block Options
+      </ion-label>
+      <ion-item *ngFor="let setting of settings">
+        <ion-input *ngIf="setting.type == 'string'" [(ngModel)]="clickedTile['setting.varname']"></ion-input>
+      </ion-item>
+    </ion-list>
   </app-sidebar>
 </ion-split-pane>

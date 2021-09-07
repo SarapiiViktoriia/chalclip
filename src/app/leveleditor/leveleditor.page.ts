@@ -11,6 +11,8 @@ export class LeveleditorPage implements OnInit {
   public levelGrid: Array<Array<Array<GameBlock>>>;
   public selectedItem: GameBlock;
   public playerCanMove: boolean;
+  public settings: Array<ISetting> = new Array<ISetting>(0);
+  public clickedTile: GameBlock;
   constructor(
     private levelHandler: LevelHandlerService
   ) { }
@@ -40,7 +42,8 @@ export class LeveleditorPage implements OnInit {
   }
   public tileClicked(blockItem: GameBlock) {
     if (!this.selectedItem) {
-      const test = blockItem.getSettings();
+      this.clickedTile = blockItem;
+      this.settings.push({ varname: 'imageSource', type: 'string' });
       return;
     }
     const position = this.levelHandler.getBlockPosition(blockItem);

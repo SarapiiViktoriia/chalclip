@@ -12,6 +12,7 @@ export abstract class SwitchBlock extends GameBlock {
   public name = 'Switch';
   @levelEditorSetting()
   public switchColor: SwitchColor;
+  @levelEditorSetting()
   protected currentState = false;
   public static getInstance(levelHandler: LevelHandlerService): SwitchBlock {
     return null;
